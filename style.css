@@ -17,6 +17,7 @@
     color: white;
     text-align: center;
     font-family: 'Lato', sans-serif;
+    font-size:1vw;
     padding: 1% 0;
     }
 
@@ -26,3 +27,14 @@
     margin-right: 10px;
     color: black
     }
+
+    .imgcenter {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+        font-family: 'Lato', sans-serif;
+        max-width: 25%;
+        min-width: 300px;
+        height: auto;
+        }
