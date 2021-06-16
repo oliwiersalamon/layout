@@ -1,32 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
 
-.center {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
-    font-family: 'Lato', sans-serif;
-    }
+    .center {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+        font-family: 'Lato', sans-serif;
+        }
     
-    .footer {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    background-color: rgb(1,100,140);
-    color: white;
-    text-align: center;
-    font-family: 'Lato', sans-serif;
-    font-size:1vw;
-    padding: 1% 0;
-    }
-
-    .zprawej{
-    position:absolute; 
-    right: 0;
-    margin-right: 10px;
-    color: black
-    }
 
     .imgcenter {
         display: block;
@@ -34,7 +15,89 @@
         margin-right: auto;
         text-align: center;
         font-family: 'Lato', sans-serif;
-        max-width: 25%;
-        min-width: 300px;
+        width: 300px;
         height: auto;
         }
+
+    /* dla desktop */
+    @media only screen and (min-width: 769px){
+
+        #footerdesktop {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: auto;
+            background-color: rgb(1,100,140);
+            color: white;
+            text-align: center;
+            font-family: 'Lato', sans-serif;
+            }
+
+        #napisfooterdesktop{
+            margin: 0px auto;
+            width: 55%;
+            text-align: center;
+        }
+
+        #nazwiskodesktop{
+            width: auto;
+            float: right;
+            margin-right: 10px;
+            color: black; 
+            text-align: right;
+    }
+
+        #footermobile {
+    display:none;
+            }
+
+        #napisfootermobile{
+    display:none;
+        }
+
+        #nazwiskomobile{
+    display:none;
+    }
+}
+
+    /* dla telefonow */
+    @media only screen and (max-width: 768px){
+
+        #footerdesktop {
+display:none;
+            }
+
+        #napisfooterdesktop{
+display:none;
+        }
+
+        #nazwiskodesktop{
+display:none;
+    }
+
+        #footermobile {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: auto;
+            background-color: rgb(1,100,140);
+            color: white;
+            text-align: center;
+            font-family: 'Lato', sans-serif;
+            }
+
+        #napisfootermobile{
+            margin: 0px auto;
+            width: auto;
+            text-align: center;
+        }
+
+        #nazwiskomobile{
+            width: auto;
+            margin-right: 10px;
+            color: black; 
+            text-align: center;
+    }
+}
