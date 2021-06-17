@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
 
+
     .center {
         display: block;
         margin-left: auto;
@@ -30,12 +31,13 @@
         border-left: 1px solid #CCCCCC;
           }
 
+
     .layoutzdjecie img{
-        display: block;
-        max-width: 100%;
+        width: 100%;
         height: auto;
     }
 
+    
     /* dla desktop */
     @media only screen and (min-width: 769px){
 
