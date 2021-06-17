@@ -31,7 +31,8 @@
           }
 
     .layoutzdjecie img{
-        width: 98vw;
+        display: block;
+        max-width: 100%;
         height: auto;
     }
 
