@@ -9,7 +9,7 @@
         }
     
 
-    .imgcenter {
+    .logocenter {
         display: block;
         margin-left: auto;
         margin-right: auto;
@@ -18,6 +18,22 @@
         width: 300px;
         height: auto;
         }
+
+    .button {
+        text-decoration: none;
+        background-color: #EEEEEE;
+        color: #333333;
+        padding: 2px 6px 2px 6px;
+        border-top: 1px solid #CCCCCC;
+        border-right: 1px solid #333333;
+        border-bottom: 1px solid #333333;
+        border-left: 1px solid #CCCCCC;
+          }
+
+    .layoutzdjecie img{
+        width: 98vw;
+        height: auto;
+    }
 
     /* dla desktop */
     @media only screen and (min-width: 769px){
@@ -32,6 +48,7 @@
             color: white;
             text-align: center;
             font-family: 'Lato', sans-serif;
+            z-index: 10; /* powoduje ze footer jest on top - im wyzszy numer tym bardziej on top*/
             }
 
         #napisfooterdesktop{
@@ -86,6 +103,7 @@ display:none;
             color: white;
             text-align: center;
             font-family: 'Lato', sans-serif;
+            z-index: 10; /* powoduje ze footer jest on top - im wyzszy numer tym bardziej on top*/
             }
 
         #napisfootermobile{

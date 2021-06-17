@@ -1,8 +1,23 @@
 <!DOCTYPE html>
+<!--Made by Oliwier Salamon-->
 <html>
     <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1" charset="utf-8">
+        <title>SP-UTC</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=10" charset="utf-8">
         <link rel="stylesheet" href="style1.css">
+
+       <script type="text/javascript" src="mapper.js"></script>
+       <script type="text/javascript" src="cvi_map_lib.js"></script>
+
+       <!-- dodanie konkretnych specyfikacji dla mapy-->
+        <script type="text/javascript">
+            
+            
+            window.onload = function() {
+                cvi_map.add(document.getElementById('zdjecie'),{opacity: 50, bordercolor: '#01648c', areacolor: '#01648c'});
+            }
+            </script>
+        <!---->
 
         <div id="footerdesktop">
             <div id="nazwiskodesktop">Oliwier Salamon</div>
@@ -22,13 +37,30 @@
 
 
 <body width="device-width">
+    <button onmouseover="extAreaOver('zdjecie','garmin');" onmouseout="extAreaOut('zdjecie','garmin');">Garminy</button>
 
-<img src="Logo-CKL-PP.png" alt="Logo CKL" class="imgcenter">
-<br>
-<h2 class="center">Tutaj będzie layout Maksa</h2>
+    <div class="layoutzdjecie">
+    <img id="zdjecie" src="SPUTCrgb.jpg" usemap="#image-map" class="mapper iborder01648c icolor01648c">
+
+    <map name="image-map">
+        <area id="garmin" target="_self" alt="Garmin" title="Garmin" href="garmin.html" coords="2177,631,4157,2129" shape="rect" rel="garmin2">
+        <area id="garmin2" target="_self" alt="Garmin2" title="Garmin2" href="garmin2.html" coords="4602,640,6582,2138" shape="rect" rel="garmin">
+    </map>
+</div>
 
 <br>
 <br>
+
+
+
 <br>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script type="text/javascript" src="imageMapResizer.min.js"></script>
+<script type="text/javascript">
+
+    $('map').imageMapResize();
+</script>
+
 </body>
 </html>
