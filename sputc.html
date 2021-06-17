@@ -9,15 +9,12 @@
        <script type="text/javascript" src="mapper.js"></script>
        <script type="text/javascript" src="cvi_map_lib.js"></script>
 
-       <!-- dodanie konkretnych specyfikacji dla mapy-->
-        <script type="text/javascript">            
-            window.onload = function() {
-                cvi_map.add(document.getElementById('zdjecie'),{opacity: 50, bordercolor: '#01648c', areacolor: '#01648c', delayed: true});
-            }
-            </script>
-        <!---->
 
-        <script type="text/javascript">            window.onload = function () {
+
+        <script type="text/javascript">            
+        window.onload = function () {
+            cvi_map.add(document.getElementById('zdjecie'),{opacity: 50, bordercolor: '#01648c', areacolor: '#01648c', delayed: true});
+
             var ImageMap = function (map, img) {
                     var n,
                         areas = map.getElementsByTagName('area'),
