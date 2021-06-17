@@ -13,7 +13,6 @@
 
         <script type="text/javascript">            
         window.onload = function () {
-            cvi_map.add(document.getElementById('zdjecie'),{opacity: 50, bordercolor: '#01648c', areacolor: '#01648c', delayed: true});
 
             var ImageMap = function (map, img) {
                     var n,
@@ -41,6 +40,9 @@
                 },
                 imageMap = new ImageMap(document.getElementById('mapa'), document.getElementById('zdjecie'));
             imageMap.resize();
+
+            cvi_map.add(document.getElementById('zdjecie'),{opacity: 50, bordercolor: '#01648c', areacolor: '#01648c', delayed: true});
+
             return;
         }</script>
 
