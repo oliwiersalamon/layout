@@ -1,9 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
 
 
+
     main{
         margin-top: 75px;
-        margin-bottom: 25px;
+        margin-bottom: 35px;
     }
 
     .center {
@@ -81,7 +82,7 @@
             bottom: 0;
             width: 100%;
             height: auto;
-            max-height: 25px;
+            max-height: 35px;
             background-color: rgb(1,100,140);
             color: white;
             text-align: center;
@@ -137,7 +138,7 @@ display:none;
             bottom: 0;
             width: 100%;
             height: auto;
-            max-height: 25px;
+            max-height: 35px;
             background-color: rgb(1,100,140);
             color: white;
             text-align: center;
