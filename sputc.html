@@ -5,12 +5,18 @@
         <title>SP-UTC</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=10" charset="utf-8">
         <link rel="stylesheet" href="style1.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        
+        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+        
 
        <script type="text/javascript" src="mapper.js"></script>
        <script type="text/javascript" src="cvi_map_lib.js"></script>
 
 
-
+<!-- dodaje mozliwosc responsive map image-->
         <script type="text/javascript">            
         window.onload = function () {
 
@@ -39,31 +45,27 @@
                     window.onresize = this.resize;
                 },
                 imageMap = new ImageMap(document.getElementById('mapa'), document.getElementById('zdjecie'));
-            imageMap.resize();
+                imageMap.resize();
 
             cvi_map.add(document.getElementById('zdjecie'),{opacity: 50, bordercolor: '#01648c', areacolor: '#01648c', delayed: true});
 
             return;
         }</script>
-
-        <div id="footerdesktop">
-            <div id="nazwiskodesktop">Oliwier Salamon</div>
-            <div id="napisfooterdesktop">
-        Strona stworzona dla Centrum Kształcenia Lotniczego Politechniki Poznańskiej
-            </div>
-        </div>
-
-        <div id="footermobile">
-            <div id="napisfootermobile">
-        Strona stworzona dla Centrum Kształcenia Lotniczego Politechniki Poznańskiej
-            </div>
-            <div id="nazwiskomobile">Oliwier Salamon</div>
-        </div>
+<!---->
 
     </head>
 
 
 <body>
+
+    <div id="naglowek">
+        
+        <img id="logomale" src="Logo-CKL-PP-male.png" alt="CKL" class="logomale">
+        <div id="szukajka">Szukaj...</div>
+    </div>
+
+    <main id="main">
+
     <button onmouseover="extAreaOver('zdjecie','garmin');" onmouseout="extAreaOut('zdjecie','garmin');">Garminy</button>
 
     <div class="layoutzdjecie">
@@ -74,16 +76,27 @@
     </map>
 </div>
 
-<br>
-<br>
 
 
 
-<br>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</main>
 
-
-
+    <div id="footerdesktop">
+        <div id="nazwiskodesktop">Oliwier Salamon</div>
+        <div id="napisfooterdesktop">
+    Strona stworzona dla Centrum Kształcenia Lotniczego Politechniki Poznańskiej
+        </div>
+    </div>
+    
+    <div id="footermobile">
+        <div id="napisfootermobile">
+    Strona stworzona dla Centrum Kształcenia Lotniczego Politechniki Poznańskiej
+        </div>
+        <div id="nazwiskomobile">Oliwier Salamon</div>
+    </div>
 </body>
+
+
+
 </html>
