@@ -58,21 +58,24 @@
 
 <body>
 
-    <div id="naglowek">
+    <header id="naglowek">
         
         <img id="logomale" src="Logo-CKL-PP-male.png" alt="CKL" class="logomale">
         <div id="szukajka">Szukaj...</div>
-        <input type="image" src="lupaikona.png" id="lupka" onclick="$('#zdjeciecontainer').zoom({ on:'click', magnify: 0.5, onZoomIn: function(){document.querySelector('#lupka').value='Kliknij na zdjęcie, aby wyjść z powiększenia';}, onZoomOut: function(){$('#zdjeciecontainer').trigger('zoom.destroy');  document.querySelector('#lupka').disabled = false;  document.querySelector('#lupka').type='image';}}); 
+        <input type="image" src="lupaikona.png" id="lupka" onclick="$('#zdjeciecontainer').zoom({ on:'click', magnify: 0.5, onZoomIn: function(){document.querySelector('#lupka').value='Kliknij na zdjęcie, aby wyjść z powiększenia';}, onZoomOut: function(){$('#zdjeciecontainer').trigger('zoom.destroy');  document.querySelector('#lupka').disabled = false;  document.querySelector('#lupka').type='image';  document.querySelector('#szukajka').style.display='initial';}}); 
+                                    document.querySelector('#szukajka').style.display='none';
                                     document.querySelector('#lupka').type = 'button';
                                     document.querySelector('#lupka').value='Kliknij na zdjęcie, aby powiększyć';
                                     document.querySelector('#lupka').disabled = true;"></button>
-    </div>
+    </header>
 
     <main>
 
-    <button onmouseover="extAreaOver('zdjecie','garmin');" onmouseout="extAreaOut('zdjecie','garmin');" onclick="$('#zdjeciecontainer').trigger('zoom.destroy');">Garminy</button>
+    <button onmouseover="extAreaOver('zdjecie','garmin');" onmouseout="extAreaOut('zdjecie','garmin');" onclick="zoomowanie();">Garminy</button>
 
-    <div id="zdjeciecontainer" class="layoutzdjecie">
+    <div id="zdjeciecontainer" class="layoutzdjecie" onclick="zoom.out();
+                                                            document.querySelector('#naglowek').style.display='initial';
+                                                            document.querySelector('#footerdesktop').style.display='initial';">
     <img id="zdjecie" src="SPUTCrgb.jpg" usemap="#image-map" class="mapper iborder01648c icolor01648c">
     <map id="mapa" name="image-map">
         <area id="garmin" target="_self" alt="Garmin" title="Garmin" href="garmin.html" coords="2177,631,4157,2129" shape="rect" rel="garmin2">
@@ -87,7 +90,7 @@
 </main>
 <br>
 
-    <div id="footerdesktop">
+    <footer id="footerdesktop">
         <div id="nazwiskodesktop">Oliwier Salamon</div>
         <div id="napisfooterdesktop">
     Strona stworzona dla Centrum Kształcenia Lotniczego Politechniki Poznańskiej
@@ -99,16 +102,52 @@
     Strona stworzona dla Centrum Kształcenia Lotniczego Politechniki Poznańskiej
         </div>
         <div id="nazwiskomobile">Oliwier Salamon</div>
-    </div>
+    </footer>
+    
+    <script src="zoom.js"></script>
+    <!-- obliczanie srodka area i zoomowanie do niego-->
+    <script type="text/javascript"> function zoomowanie(){ 
+        var maxX = 0,
+        minX = Infinity,
+        maxY = 0,
+        minY = Infinity,
+        i = 0;
+            coords = document.querySelector("#garmin").getAttribute('coords').split(',');
+
+ while (i < coords.length) {
+            var x = parseInt(coords[i++],10),
+                y = parseInt(coords[i++],10);
+
+            if (x < minX) minX = x;
+            else if (x > maxX) maxX = x;
+
+            if (y < minY) minY = y;
+            else if (y > maxY) maxY = y;
+        }
+
+ x = minX + (maxX - minX) / 2;
+ y = minY + (maxY - minY) / 2; 
+
+ document.querySelector("#naglowek").style.display="none";
+ document.querySelector("#footerdesktop").style.display="none";
+
+ zoom.to({
+    x: x,
+    y: y,
+    scale: 2
+  });}
+  </script>
+  <!---->
+
+           <!-- ukrywa przycisk lupy na mobilnych-->
+           <script type="text/javascript">
+            if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
+             // true dla mobilnych
+             document.querySelector("#lupka").style.display="none";
+           }
+             </script>
+             <!---->
 </body>
 
-       <!-- ukrywa przycisk lupy na mobilnych-->
-       <script type="text/javascript">
-        if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
-         // true dla mobilnych
-         document.querySelector("#lupka").style.display="none";
-       }
-         </script>
-         <!---->
 
 </html>
