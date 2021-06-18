@@ -104,6 +104,18 @@
         <div id="nazwiskomobile">Oliwier Salamon</div>
     </footer>
     
+           <!-- ukrywa przycisk lupy na mobilnych-->
+           <script type="text/javascript">
+            if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
+             // true dla mobilnych
+             document.querySelector("#lupka").style.display="none";
+             document.querySelector("head > meta").outerHTML = "<meta name='viewport' content='width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1' charset='utf-8'>"
+             var skala = 3;
+           }else{var skala = 2;}
+             </script>
+             <!---->
+
+    <!-- zoom do przyblizania po szukaniu-->
     <script src="zoom.js"></script>
     <!-- obliczanie srodka area i zoomowanie do niego-->
     <script type="text/javascript"> function zoomowanie(){ 
@@ -112,7 +124,7 @@
         maxY = 0,
         minY = Infinity,
         i = 0;
-            coords = document.querySelector("#garmin").getAttribute('coords').split(',');
+            coords = document.querySelector("#garmin2").getAttribute('coords').split(',');
 
  while (i < coords.length) {
             var x = parseInt(coords[i++],10),
@@ -132,21 +144,14 @@
  document.querySelector("#footerdesktop").style.display="none";
 
  zoom.to({
-    x: x,
-    y: y,
-    scale: 2
+    x: minX,
+    y: minY,
+    width: maxX - minX + 25,
+    height: maxY - minY + 75
   });}
   </script>
   <!---->
 
-           <!-- ukrywa przycisk lupy na mobilnych-->
-           <script type="text/javascript">
-            if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
-             // true dla mobilnych
-             document.querySelector("#lupka").style.display="none";
-           }
-             </script>
-             <!---->
 </body>
 
 
