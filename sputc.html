@@ -109,9 +109,7 @@
             if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
              // true dla mobilnych
              document.querySelector("#lupka").style.display="none";
-             document.querySelector("head > meta").outerHTML = "<meta name='viewport' content='width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1' charset='utf-8'>"
-             var skala = 3;
-           }else{var skala = 2;}
+           }
              </script>
              <!---->
 
@@ -146,7 +144,7 @@
  zoom.to({
     x: minX,
     y: minY,
-    width: maxX - minX + 25,
+    width: maxX - minX + 40,
     height: maxY - minY + 75
   });}
   </script>
