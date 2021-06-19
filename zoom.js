@@ -23,20 +23,20 @@ var zoom = (function(){
 	// Timeout for callback function
 	var callbackTimeout = -1;
 
-	// Check for transform support so that we can fallback otherwise
-	var supportsTransforms = 	'WebkitTransform' in document.body.style ||
-								'MozTransform' in document.body.style ||
-								'msTransform' in document.body.style ||
-								'OTransform' in document.body.style ||
-								'transform' in document.body.style;
+	// Check for transform support so that we can fallback otherwise (zmienione z document.body na document.querySelector)
+	var supportsTransforms = 	'WebkitTransform' in document.querySelector("#zdjeciecontainer").style ||
+								'MozTransform' in document.querySelector("#zdjeciecontainer").style ||
+								'msTransform' in document.querySelector("#zdjeciecontainer").style ||
+								'OTransform' in document.querySelector("#zdjeciecontainer").style ||
+								'transform' in document.querySelector("#zdjeciecontainer").style;
 
 	if( supportsTransforms ) {
 		// The easing that will be applied when we zoom in/out
-		document.body.style.transition = 'transform '+ TRANSITION_DURATION +'ms ease';
-		document.body.style.OTransition = '-o-transform '+ TRANSITION_DURATION +'ms ease';
-		document.body.style.msTransition = '-ms-transform '+ TRANSITION_DURATION +'ms ease';
-		document.body.style.MozTransition = '-moz-transform '+ TRANSITION_DURATION +'ms ease';
-		document.body.style.WebkitTransition = '-webkit-transform '+ TRANSITION_DURATION +'ms ease';
+		document.querySelector("#zdjeciecontainer").style.transition = 'transform '+ TRANSITION_DURATION +'ms ease';
+		document.querySelector("#zdjeciecontainer").style.OTransition = '-o-transform '+ TRANSITION_DURATION +'ms ease';
+		document.querySelector("#zdjeciecontainer").style.msTransition = '-ms-transform '+ TRANSITION_DURATION +'ms ease';
+		document.querySelector("#zdjeciecontainer").style.MozTransition = '-moz-transform '+ TRANSITION_DURATION +'ms ease';
+		document.querySelector("#zdjeciecontainer").style.WebkitTransition = '-webkit-transform '+ TRANSITION_DURATION +'ms ease';
 	}
 
 	// Zoom out if the user hits escape
@@ -72,52 +72,52 @@ var zoom = (function(){
 		// Center the rect within the zoomed viewport
 		rect.x -= ( window.innerWidth - ( rect.width * scale ) ) / 2;
 		rect.y -= ( window.innerHeight - ( rect.height * scale ) ) / 2;
-
+//zostaly zmienione funkcje z document.body na document.querySelector zeby przyblizalo tylko zdjecie
 		if( supportsTransforms ) {
 			// Reset
 			if( scale === 1 ) {
-				document.body.style.transform = '';
-				document.body.style.OTransform = '';
-				document.body.style.msTransform = '';
-				document.body.style.MozTransform = '';
-				document.body.style.WebkitTransform = '';
+				document.querySelector("#zdjeciecontainer").style.transform = '';
+				document.querySelector("#zdjeciecontainer").style.OTransform = '';
+				document.querySelector("#zdjeciecontainer").style.msTransform = '';
+				document.querySelector("#zdjeciecontainer").style.MozTransform = '';
+				document.querySelector("#zdjeciecontainer").style.WebkitTransform = '';
 			}
 			// Scale
 			else {
 				var origin = scrollOffset.x +'px '+ scrollOffset.y +'px',
 					transform = 'translate('+ -rect.x +'px,'+ -rect.y +'px) scale('+ scale +')';
 
-				document.body.style.transformOrigin = origin;
-				document.body.style.OTransformOrigin = origin;
-				document.body.style.msTransformOrigin = origin;
-				document.body.style.MozTransformOrigin = origin;
-				document.body.style.WebkitTransformOrigin = origin;
+				document.querySelector("#zdjeciecontainer").style.transformOrigin = origin;
+				document.querySelector("#zdjeciecontainer").style.OTransformOrigin = origin;
+				document.querySelector("#zdjeciecontainer").style.msTransformOrigin = origin;
+				document.querySelector("#zdjeciecontainer").style.MozTransformOrigin = origin;
+				document.querySelector("#zdjeciecontainer").style.WebkitTransformOrigin = origin;
 
-				document.body.style.transform = transform;
-				document.body.style.OTransform = transform;
-				document.body.style.msTransform = transform;
-				document.body.style.MozTransform = transform;
-				document.body.style.WebkitTransform = transform;
+				document.querySelector("#zdjeciecontainer").style.transform = transform;
+				document.querySelector("#zdjeciecontainer").style.OTransform = transform;
+				document.querySelector("#zdjeciecontainer").style.msTransform = transform;
+				document.querySelector("#zdjeciecontainer").style.MozTransform = transform;
+				document.querySelector("#zdjeciecontainer").style.WebkitTransform = transform;
 			}
 		}
 		else {
 			// Reset
 			if( scale === 1 ) {
-				document.body.style.position = '';
-				document.body.style.left = '';
-				document.body.style.top = '';
-				document.body.style.width = '';
-				document.body.style.height = '';
-				document.body.style.zoom = '';
+				document.querySelector("#zdjeciecontainer").style.position = '';
+				document.querySelector("#zdjeciecontainer").style.left = '';
+				document.querySelector("#zdjeciecontainer").style.top = '';
+				document.querySelector("#zdjeciecontainer").style.width = '';
+				document.querySelector("#zdjeciecontainer").style.height = '';
+				document.querySelector("#zdjeciecontainer").style.zoom = '';
 			}
 			// Scale
 			else {
-				document.body.style.position = 'relative';
-				document.body.style.left = ( - ( scrollOffset.x + rect.x ) / scale ) + 'px';
-				document.body.style.top = ( - ( scrollOffset.y + rect.y ) / scale ) + 'px';
-				document.body.style.width = ( scale * 100 ) + '%';
-				document.body.style.height = ( scale * 100 ) + '%';
-				document.body.style.zoom = scale;
+				document.querySelector("#zdjeciecontainer").style.position = 'relative';
+				document.querySelector("#zdjeciecontainer").style.left = ( - ( scrollOffset.x + rect.x ) / scale ) + 'px';
+				document.querySelector("#zdjeciecontainer").style.top = ( - ( scrollOffset.y + rect.y ) / scale ) + 'px';
+				document.querySelector("#zdjeciecontainer").style.width = ( scale * 100 ) + '%';
+				document.querySelector("#zdjeciecontainer").style.height = ( scale * 100 ) + '%';
+				document.querySelector("#zdjeciecontainer").style.zoom = scale;
 			}
 		}
 
@@ -128,7 +128,9 @@ var zoom = (function(){
 	 * Pan the document when the mouse cursor approaches the edges
 	 * of the window.
 	 */
-	function pan() {
+	/* panning wylaczony */
+
+	/* function pan() {
 		var range = 0.12,
 			rangeX = window.innerWidth * range,
 			rangeY = window.innerHeight * range,
@@ -151,7 +153,7 @@ var zoom = (function(){
 		else if( mouseX > window.innerWidth - rangeX ) {
 			window.scroll( scrollOffset.x + ( 1 - ( window.innerWidth - mouseX ) / rangeX ) * ( 14 / level ), scrollOffset.y );
 		}
-	}
+	} */
 
 	function getScrollOffset() {
 		return {
@@ -181,8 +183,9 @@ var zoom = (function(){
 
 			// Due to an implementation limitation we can't zoom in
 			// to another element without zooming out first
+			//dodano callback po zoom.out zeby odblokowac mozliwosc scrollowania
 			if( level !== 1 ) {
-				zoom.out();
+				zoom.out({callback: function(){document.body.style.overflow = 'initial';}});
 			}
 			else {
 				options.x = options.x || 0;
@@ -214,6 +217,7 @@ var zoom = (function(){
 
 					magnify( options, options.scale );
 
+					/* panning wylaczony
 					if( options.pan !== false ) {
 
 						// Wait with engaging panning as it may conflict with the
@@ -222,7 +226,7 @@ var zoom = (function(){
 							panUpdateInterval = setInterval( pan, 1000 / 60 );
 						}, TRANSITION_DURATION );
 
-					}
+					} */
 
 					if( typeof options.callback === 'function' ) {
 						callbackTimeout = setTimeout( options.callback, TRANSITION_DURATION );
