@@ -10,6 +10,7 @@
         
         <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
         <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+        <script src="pl.js"></script>
 
         
 
@@ -57,29 +58,82 @@
 
 
 <body>
+    <!-- skrypt od szukajki-->
+    <script type="text/javascript">  
+        $(document).ready(function() {
+            $('.js-example-basic-single').select2({
+                placeholder: "Szukaj...",
+                allowClear: true,
+                language: "pl",
+                dropdownParent: $('#szukajka')
+            });
+        });
+
+//wrzuca kursor w pole szukania
+        $(document).on('select2:open', () => {
+    document.querySelector('.select2-search__field').focus();
+  }); //
+    </script>
+    <!---->
+
+<!-- funkcja ktora usuwa wszystkie podswietlenia oprocz tego na ktore sie najezdza -->
+    <script type="text/javascript">  
+    function usuwaniepodswietleniawszystkim(toid){
+        for (var step = 0; step < document.querySelector("#mapa").children.length; step++) {
+            if (toid == document.querySelector("#mapa").children[step].id) {}else{
+        if(document.getElementById(toid).rel.split(',').includes(document.querySelector("#mapa").children[step].id)){}else{extAreaOut('zdjecie', 'garmin');}   
+}
+}
+extAreaOver('zdjecie',toid);
+    }
+</script>
+
+
 
     <header id="naglowek">
         
-        <img id="logomale" src="Logo-CKL-PP-male.png" alt="CKL" class="logomale">
-        <div id="szukajka">Szukaj...</div>
-        <input type="image" src="lupaikona.png" id="lupka" onclick="$('#zdjeciecontainer').zoom({ on:'click', magnify: 0.5, onZoomIn: function(){document.querySelector('#lupka').value='Kliknij na zdjęcie, aby wyjść z powiększenia';}, onZoomOut: function(){$('#zdjeciecontainer').trigger('zoom.destroy');  document.querySelector('#lupka').disabled = false;  document.querySelector('#lupka').type='image';  document.querySelector('#szukajka').style.display='initial';}}); 
-                                    document.querySelector('#szukajka').style.display='none';
+        <a href="https://ckl.put.poznan.pl/ato/"><img id="logomale" src="Logo-CKL-PP-male.png" alt="CKL" class="logomale"></a>
+        <div id="szukajka" style="visibility: hidden;">
+            <select id="szukajkaselection" class="js-example-basic-single" name="szukaj" style="width: 35%">
+                <option></option>
+                <option value="garmin">Garmin lewy</option>
+                <option value="garmin2">Garmin prawy</option>
+                <option value="throttle">Throttle</option>
+              </select>
+<!-- skrypt uruchamiajacy to co sie stanie po select i unselect przez szukajke-->
+              <script type="text/javascript">  
+                
+                    $('.js-example-basic-single').on('select2:select', function(e) {
+                        var wartosc = e.params.data;
+                       cvi_map.remove(document.getElementById('zdjecie'));
+                       cvi_map.add(document.getElementById('zdjecie'),{opacity: 50, bordercolor: '#01648c', areacolor: '#01648c', delayed: true});
+                       extAreaOver('zdjecie', wartosc.id);
+                });
+
+                $('.js-example-basic-single').on('select2:unselect', function() {
+                       cvi_map.remove(document.getElementById('zdjecie'));
+                       cvi_map.add(document.getElementById('zdjecie'),{opacity: 50, bordercolor: '#01648c', areacolor: '#01648c', delayed: true});
+                       setTimeout(function(){$('.js-example-basic-single').select2('close');},1); //po usunieciu w szukajce nie otwiera sie szukajka jeszcze raz
+                });
+                    </script>
+<!---->
+<button id="przyblizbtn" onclick="zoomowanie(document.querySelector('#szukajkaselection').value);">Przybliż</button>
+        </div>
+        <input type="image" src="lupaikona.png" id="lupka" style="visibility:hidden" onclick="$('#zdjeciecontainer').zoom({ on:'click', magnify: 0.5, onZoomIn: function(){document.querySelector('#lupka').value='Kliknij na zdjęcie, aby wyjść z powiększenia';}, onZoomOut: function(){$('#zdjeciecontainer').trigger('zoom.destroy');  document.querySelector('#lupka').disabled = false;  document.querySelector('#lupka').type='image';  document.querySelector('#szukajka').style.visibility='visible';}}); 
+                                    document.querySelector('#szukajka').style.visibility='hidden';
                                     document.querySelector('#lupka').type = 'button';
                                     document.querySelector('#lupka').value='Kliknij na zdjęcie, aby powiększyć';
                                     document.querySelector('#lupka').disabled = true;"></input>
-        <button onclick="zoomowanie('throttle');">ELO</button>
+        
     </header>
 
     <main>
-
-    <button onmouseover="extAreaOver('zdjecie','garmin');" onmouseout="extAreaOut('zdjecie','garmin');" onclick="zoomowanie('garmin2');">Garminy</button>
-
-    <div id="zdjeciecontainer" class="layoutzdjecie" onclick="zoom.out({callback: function(){document.body.style.overflow = 'initial';}});">
-    <img id="zdjecie" src="SPUTCrgb.jpg" usemap="#image-map" class="mapper iborder01648c icolor01648c">
+    <div id="zdjeciecontainer" class="layoutzdjecie" onclick="zoom.out({callback: function(){document.body.style.overflow = 'initial';}}); document.querySelector('#przyblizbtn').innerText = 'Przybliż'; $('.js-example-basic-single').prop('disabled', false); document.querySelector('#lupka').style.visibility='visible';">
+    <img id="zdjecie" src="SPUTCrgb.jpg" usemap="#image-map" class="mapper iborder01648c icolor01648c" onload="document.querySelector('#lupka').style.visibility='visible'; document.querySelector('#szukajka').style.visibility='visible';">
     <map id="mapa" name="image-map">
-        <area id="garmin" target="_blank" alt="Garmin" title="Garmin" href="garmin.html" coords="2177,631,4157,2129" shape="rect" rel="garmin2">
-        <area id="garmin2" target="_blank" alt="Garmin2" title="Garmin2" href="garmin2.html" coords="4602,640,6582,2138" shape="rect" rel="garmin">
-        <area id="throttle" target="_blank" alt="Throttle" title="Throttle" href="throttle.html" coords="4893,3802,136" shape="circle">
+        <area id="garmin" target="_blank" alt="Garmin" title="Garmin" href="garmin.html" coords="2177,631,4157,2129" shape="rect" onmouseover="usuwaniepodswietleniawszystkim(this.id); $('.js-example-basic-single').val(this.id).trigger('change');" onmouseout="$('.js-example-basic-single').val(null).trigger('change');">
+        <area id="garmin2" target="_blank" alt="Garmin2" title="Garmin2" href="garmin2.html" coords="4602,640,6582,2138" shape="rect" onmouseover="usuwaniepodswietleniawszystkim(this.id); $('.js-example-basic-single').val(this.id).trigger('change');" onmouseout="$('.js-example-basic-single').val(null).trigger('change');">
+        <area id="throttle" target="_blank" alt="Throttle" title="Throttle" href="throttle.html" coords="4893,3802,136" shape="circle" onmouseover="usuwaniepodswietleniawszystkim(this.id); $('.js-example-basic-single').val(this.id).trigger('change');" onmouseout="$('.js-example-basic-single').val(null).trigger('change');">
     </map>
 </div>
 
@@ -118,6 +172,9 @@
     <script src="zoom.js"></script>
     <!-- obliczanie srodka area i zoomowanie do niego-->
     <script type="text/javascript"> function zoomowanie(nazwazoom){ 
+        if(nazwazoom == ""){}else{
+       if(document.querySelector("#przyblizbtn").innerText == "Oddal"){document.querySelector("#przyblizbtn").innerText = "Przybliż"; $(".js-example-basic-single").prop("disabled", false); document.querySelector('#lupka').style.visibility='visible';}else{document.querySelector("#przyblizbtn").innerText = "Oddal"; $(".js-example-basic-single").prop("disabled", true); document.querySelector('#lupka').style.visibility='hidden';}
+
         var maxX = 0,
         minX = Infinity,
         maxY = 0,
@@ -156,20 +213,27 @@
  if(window.scrollY != 0){window.scrollTo({top: 0, behavior: 'smooth' }); //scrolluje na gore tylko jesli nie jest jeszcze na gorze bo inaczej zle przenosi
  setTimeout(function(){ zoom.to({
     x: x,
-    y: y+40,
+    y: y,
     scale: skala
   });},500); //czas po scrollu zeby przyblizyc
 }else{zoom.to({
     x: x,
-    y: y+40,
+    y: y,
     scale: skala
   });}
 
   document.body.style.overflow = "hidden";
-}
+}}
   
   </script>
-  <!---->
+  <!--sprawdza czy zdjecie juz sie zaladowalo
+  <script type="text/javascript">  
+    document.querySelector("#zdjecie").onload = function() {
+        alert("ready");
+    };
+    </script>
+-->
+    
 
 </body>
 
