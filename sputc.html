@@ -140,7 +140,7 @@ extAreaOver('zdjecie',toid);
         
         <a target="_blank" href="https://ckl.put.poznan.pl/ato/"><img id="logomale" src="Logo-CKL-PP-male.png" alt="CKL" class="logomale"></a>
         <div id="szukajka" style="visibility: hidden;">
-            <select id="szukajkaselection" class="js-example-basic-single" name="szukaj" style="width: 35%">
+            <select id="szukajkaselection" class="js-example-basic-single" name="szukaj" style="width: 100%">
               </select>
 <!-- skrypt uruchamiajacy to co sie stanie po select i unselect przez szukajke-->
               <script type="text/javascript">  
@@ -163,14 +163,14 @@ extAreaOver('zdjecie',toid);
                 });
                     </script>
 <!---->
-<button id="przyblizbtn" onclick="zoomowanie(document.querySelector('#szukajkaselection').value);">Przybliż</button>
+<button id="przyblizbtn" onclick="zoomowanie(document.querySelector('#szukajkaselection').value);" style="min-width: 10%">Przybliż</button>
+<button id="idzbtn" onclick="if(document.querySelector('#szukajkaselection').value==''){}else{window.open(document.querySelector('#szukajkaselection').value+'.html','_blank')}" style="min-width: 10%">Idź</button>
         </div>
         <input type="image" src="lupaikona.png" id="lupka" style="visibility:hidden" disabled="true" onclick="$('#zdjeciecontainer').zoom({ on:'click', magnify: 0.5, onZoomIn: function(){document.querySelector('#lupka').value='Kliknij na zdjęcie, aby wyjść z powiększenia';}, onZoomOut: function(){$('#zdjeciecontainer').trigger('zoom.destroy');  document.querySelector('#lupka').disabled = false;  document.querySelector('#lupka').type='image';  document.querySelector('#szukajka').style.visibility='visible';}}); 
                                     document.querySelector('#szukajka').style.visibility='hidden';
                                     document.querySelector('#lupka').type = 'button';
                                     document.querySelector('#lupka').value='Kliknij na zdjęcie, aby powiększyć';
                                     document.querySelector('#lupka').disabled = true;"></input>
-        
     </header>
 
     <main>

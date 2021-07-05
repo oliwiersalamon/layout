@@ -68,15 +68,18 @@
 
     #szukajka{
         margin: 0px auto;
+        padding-left: 110px;
+        padding-right: 110px;
         width: 55%;
         text-align: center;
         color: black;
+        word-wrap:break-word;
 
     }
 
     #lupka{
         margin-right: 10px;
-        margin-top: 0px;
+        margin-top: -50px;
         width: auto;
         height: auto;
         max-height: 30px;
