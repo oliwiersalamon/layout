@@ -65,9 +65,53 @@
                 placeholder: "Szukaj...",
                 allowClear: true,
                 language: "pl",
-                dropdownParent: $('#szukajka')
+                dropdownParent: $('#szukajka'),
+                matcher: customMatcher,
+                data: data,
+                minimumInputLength: 2
             });
         });
+
+        var data = [
+        {
+        id: '',
+        text: '',
+        synonym: ''
+    }, //to jest puste zeby jako pierwsza opcja wskoczylo
+    {
+        id: 'garmin',
+        text: 'Garmin lewy',
+        synonym: 'Ekran/PFD' //rozdzielam je za pomoca '/' tak po prostu
+    },
+    {
+        id: 'garmin2',
+        text: 'Garmin prawy',
+        synonym: 'Ekran/MFD'
+    },
+    {
+        id: 'throttle',
+        text: 'Throttle',
+        synonym: 'Przepustnica/Dźwignia'
+    }
+];
+
+        var defaultMatcher = $.fn.select2.defaults.defaults.matcher; //definiuje defaultowego matchera
+function customMatcher(params, data) {
+    var chars = {'ą':'a','ć':'c','ź':'z','ż':'z','ę':'e','ó':'o','ł':'l','ś':'s','ń':'n'}; //definiuje jakie znaki na co zamienic
+    var synonimypolskie = data.synonym.replace(/[ąćźżęółśń]/g, m => chars[m]); //zamienia wszystkie polskie znaki na normalne litery
+    if ($.trim(params.term) === ''){return data;}else{ //zeby nie wyskakiwal blad gdy nic nie jest wpisane
+ if (synonimypolskie.toUpperCase().indexOf(params.term.toUpperCase()) > -1) //pozwala wyszukiwac frazy bez polskich znakow
+ {var modifiedData = $.extend({}, data, true);
+ var slowooindeksie = synonimypolskie.toUpperCase().split('/').findIndex(v => v.includes(params.term.toUpperCase())) //patrzy ktory indeks ma slowo wpisywane z synonimow
+      modifiedData.text = modifiedData.text+' ('+data.synonym.split('/')[slowooindeksie]+')'; //wyswietla to slowo(synonim) w nawiasie
+     return modifiedData;}
+ if (data.synonym.toUpperCase().indexOf(params.term.toUpperCase()) > -1) //pozwala wyszukiwac frazy tak jak sa, czyli z polskimi znakami
+ {var modifiedData = $.extend({}, data, true);
+ var slowooindeksie = data.synonym.toUpperCase().split('/').findIndex(v => v.includes(params.term.toUpperCase())) //patrzy ktory indeks ma slowo wpisywane z synonimow z polskimi znakami
+      modifiedData.text = modifiedData.text+' ('+data.synonym.split('/')[slowooindeksie]+')'; //wyswietla to slowo(synonim) w nawiasie
+     return modifiedData;}}
+  return defaultMatcher(params, data);
+}
 
 //wrzuca kursor w pole szukania
         $(document).on('select2:open', () => {
@@ -79,11 +123,13 @@
 <!-- funkcja ktora usuwa wszystkie podswietlenia oprocz tego na ktore sie najezdza -->
     <script type="text/javascript">  
     function usuwaniepodswietleniawszystkim(toid){
-        for (var step = 0; step < document.querySelector("#mapa").children.length; step++) {
-            if (toid == document.querySelector("#mapa").children[step].id) {}else{
-        if(document.getElementById(toid).rel.split(',').includes(document.querySelector("#mapa").children[step].id)){}else{extAreaOut('zdjecie', 'garmin');}   
-}
-}
+//        for (var step = 0; step < document.querySelector("#mapa").children.length; step++) {
+//            if (toid == document.querySelector("#mapa").children[step].id) {}else{
+//        if(document.getElementById(toid).rel.split(',').includes(document.querySelector("#mapa").children[step].id)){}else{extAreaOut('zdjecie', 'garmin');}   
+//}
+//}
+//na gorze zostawiam stary sposob - ten na dole jest lepszy
+extAreaOut('zdjecie',toid);
 extAreaOver('zdjecie',toid);
     }
 </script>
@@ -92,34 +138,34 @@ extAreaOver('zdjecie',toid);
 
     <header id="naglowek">
         
-        <a href="https://ckl.put.poznan.pl/ato/"><img id="logomale" src="Logo-CKL-PP-male.png" alt="CKL" class="logomale"></a>
+        <a target="_blank" href="https://ckl.put.poznan.pl/ato/"><img id="logomale" src="Logo-CKL-PP-male.png" alt="CKL" class="logomale"></a>
         <div id="szukajka" style="visibility: hidden;">
             <select id="szukajkaselection" class="js-example-basic-single" name="szukaj" style="width: 35%">
-                <option></option>
-                <option value="garmin">Garmin lewy</option>
-                <option value="garmin2">Garmin prawy</option>
-                <option value="throttle">Throttle</option>
               </select>
 <!-- skrypt uruchamiajacy to co sie stanie po select i unselect przez szukajke-->
               <script type="text/javascript">  
                 
                     $('.js-example-basic-single').on('select2:select', function(e) {
                         var wartosc = e.params.data;
-                       cvi_map.remove(document.getElementById('zdjecie'));
-                       cvi_map.add(document.getElementById('zdjecie'),{opacity: 50, bordercolor: '#01648c', areacolor: '#01648c', delayed: true});
+                       //cvi_map.remove(document.getElementById('zdjecie'));
+                       //cvi_map.add(document.getElementById('zdjecie'),{opacity: 50, bordercolor: '#01648c', areacolor: '#01648c', delayed: true});
+                       //powyzej stary sposob i usuniety - ponizej lepszy
+                       extAreaOut('zdjecie', wartosc.id);
                        extAreaOver('zdjecie', wartosc.id);
                 });
 
-                $('.js-example-basic-single').on('select2:unselect', function() {
-                       cvi_map.remove(document.getElementById('zdjecie'));
-                       cvi_map.add(document.getElementById('zdjecie'),{opacity: 50, bordercolor: '#01648c', areacolor: '#01648c', delayed: true});
+                $('.js-example-basic-single').on('select2:unselect', function(e) { //dodane 'e' w nowym sposobie
+                    var wartosc = e.params.data;  //dodane w nowym sposobie
+                    extAreaOut('zdjecie', wartosc.id); //ponizej sposob stary i usuniety, tutaj nowy, lepszy
+                    //cvi_map.remove(document.getElementById('zdjecie'));
+                       //cvi_map.add(document.getElementById('zdjecie'),{opacity: 50, bordercolor: '#01648c', areacolor: '#01648c', delayed: true});
                        setTimeout(function(){$('.js-example-basic-single').select2('close');},1); //po usunieciu w szukajce nie otwiera sie szukajka jeszcze raz
                 });
                     </script>
 <!---->
 <button id="przyblizbtn" onclick="zoomowanie(document.querySelector('#szukajkaselection').value);">Przybliż</button>
         </div>
-        <input type="image" src="lupaikona.png" id="lupka" style="visibility:hidden" onclick="$('#zdjeciecontainer').zoom({ on:'click', magnify: 0.5, onZoomIn: function(){document.querySelector('#lupka').value='Kliknij na zdjęcie, aby wyjść z powiększenia';}, onZoomOut: function(){$('#zdjeciecontainer').trigger('zoom.destroy');  document.querySelector('#lupka').disabled = false;  document.querySelector('#lupka').type='image';  document.querySelector('#szukajka').style.visibility='visible';}}); 
+        <input type="image" src="lupaikona.png" id="lupka" style="visibility:hidden" disabled="true" onclick="$('#zdjeciecontainer').zoom({ on:'click', magnify: 0.5, onZoomIn: function(){document.querySelector('#lupka').value='Kliknij na zdjęcie, aby wyjść z powiększenia';}, onZoomOut: function(){$('#zdjeciecontainer').trigger('zoom.destroy');  document.querySelector('#lupka').disabled = false;  document.querySelector('#lupka').type='image';  document.querySelector('#szukajka').style.visibility='visible';}}); 
                                     document.querySelector('#szukajka').style.visibility='hidden';
                                     document.querySelector('#lupka').type = 'button';
                                     document.querySelector('#lupka').value='Kliknij na zdjęcie, aby powiększyć';
@@ -128,8 +174,8 @@ extAreaOver('zdjecie',toid);
     </header>
 
     <main>
-    <div id="zdjeciecontainer" class="layoutzdjecie" onclick="zoom.out({callback: function(){document.body.style.overflow = 'initial';}}); document.querySelector('#przyblizbtn').innerText = 'Przybliż'; $('.js-example-basic-single').prop('disabled', false); document.querySelector('#lupka').style.visibility='visible';">
-    <img id="zdjecie" src="SPUTCrgb.jpg" usemap="#image-map" class="mapper iborder01648c icolor01648c" onload="document.querySelector('#lupka').style.visibility='visible'; document.querySelector('#szukajka').style.visibility='visible';">
+    <div id="zdjeciecontainer" class="layoutzdjecie" onclick="zoom.out({callback: function(){document.body.style.overflow = 'initial';}}); document.querySelector('#przyblizbtn').innerText = 'Przybliż'; $('.js-example-basic-single').prop('disabled', false); document.querySelector('#lupka').style.visibility='visible'; document.querySelector('#lupka').disabled = false;">
+    <img id="zdjecie" src="SPUTCrgb.jpg" usemap="#image-map" class="mapper iborder01648c icolor01648c" onload="document.querySelector('#lupka').style.visibility='visible'; document.querySelector('#lupka').disabled = false; document.querySelector('#szukajka').style.visibility='visible';">
     <map id="mapa" name="image-map">
         <area id="garmin" target="_blank" alt="Garmin" title="Garmin" href="garmin.html" coords="2177,631,4157,2129" shape="rect" onmouseover="usuwaniepodswietleniawszystkim(this.id); $('.js-example-basic-single').val(this.id).trigger('change');" onmouseout="$('.js-example-basic-single').val(null).trigger('change');">
         <area id="garmin2" target="_blank" alt="Garmin2" title="Garmin2" href="garmin2.html" coords="4602,640,6582,2138" shape="rect" onmouseover="usuwaniepodswietleniawszystkim(this.id); $('.js-example-basic-single').val(this.id).trigger('change');" onmouseout="$('.js-example-basic-single').val(null).trigger('change');">
@@ -172,8 +218,8 @@ extAreaOver('zdjecie',toid);
     <script src="zoom.js"></script>
     <!-- obliczanie srodka area i zoomowanie do niego-->
     <script type="text/javascript"> function zoomowanie(nazwazoom){ 
-        if(nazwazoom == ""){}else{
-       if(document.querySelector("#przyblizbtn").innerText == "Oddal"){document.querySelector("#przyblizbtn").innerText = "Przybliż"; $(".js-example-basic-single").prop("disabled", false); document.querySelector('#lupka').style.visibility='visible';}else{document.querySelector("#przyblizbtn").innerText = "Oddal"; $(".js-example-basic-single").prop("disabled", true); document.querySelector('#lupka').style.visibility='hidden';}
+        if(nazwazoom == ""){zoom.out({callback: function(){document.body.style.overflow = 'initial';}}); document.querySelector("#przyblizbtn").innerText = "Przybliż"; $(".js-example-basic-single").prop("disabled", false); document.querySelector('#lupka').style.visibility='visible'; document.querySelector("#lupka").disabled = false;}else{
+       if(document.querySelector("#przyblizbtn").innerText == "Oddal"){document.querySelector("#przyblizbtn").innerText = "Przybliż"; $(".js-example-basic-single").prop("disabled", false); document.querySelector('#lupka').style.visibility='visible'; document.querySelector("#lupka").disabled = false;}else{document.querySelector("#przyblizbtn").innerText = "Oddal"; $(".js-example-basic-single").prop("disabled", true); document.querySelector('#lupka').style.visibility='hidden'; document.querySelector("#lupka").disabled = true;}
 
         var maxX = 0,
         minX = Infinity,
@@ -226,13 +272,6 @@ extAreaOver('zdjecie',toid);
 }}
   
   </script>
-  <!--sprawdza czy zdjecie juz sie zaladowalo
-  <script type="text/javascript">  
-    document.querySelector("#zdjecie").onload = function() {
-        alert("ready");
-    };
-    </script>
--->
     
 
 </body>
