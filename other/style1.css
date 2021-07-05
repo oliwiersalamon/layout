@@ -1,0 +1,178 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+
+
+    main{
+        margin-top: 75px;
+        margin-bottom: 35px;
+    }
+
+    .center {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+        font-family: 'Lato', sans-serif;
+        }
+    
+
+    .logocenter {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+        font-family: 'Lato', sans-serif;
+        width: 300px;
+        height: auto;
+        }
+
+    .button {
+        text-decoration: none;
+        background-color: #EEEEEE;
+        color: #333333;
+        padding: 2px 6px 2px 6px;
+        border-top: 1px solid #CCCCCC;
+        border-right: 1px solid #333333;
+        border-bottom: 1px solid #333333;
+        border-left: 1px solid #CCCCCC;
+          }
+
+
+    .layoutzdjecie img{
+        width: 100%;
+        height: auto;
+    }
+
+    .logomale {
+        margin-left: 10px;
+        width: 100px;
+        height: auto;
+        left: 0;
+        float: left;
+        }
+
+    #naglowek{
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: auto;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        max-height: 75px;
+        background-color: rgb(1,100,140);
+        color: white;
+        text-align: center;
+        font-family: 'Lato', sans-serif;
+        z-index: 10; /* powoduje ze naglowek jest on top - im wyzszy numer tym bardziej on top*/
+            }
+
+    #szukajka{
+        margin: 0px auto;
+        padding-left: 140px;
+        padding-right: 140px;
+        width: 55%;
+        text-align: center;
+        color: black;
+        word-wrap:break-word;
+
+    }
+
+    #lupka{
+        margin-right: 10px;
+        margin-top: -50px;
+        width: auto;
+        height: auto;
+        max-height: 30px;
+        right: 0;
+        float: right;
+    }
+
+    
+    /* dla desktop */
+    @media only screen and (min-width: 769px){
+
+        #footerdesktop {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            padding-bottom: 5px;
+            width: 100%;
+            height: auto;
+            max-height: 35px;
+            background-color: rgb(1,100,140);
+            color: white;
+            text-align: center;
+            font-family: 'Lato', sans-serif;
+            z-index: 10; /* powoduje ze footer jest on top - im wyzszy numer tym bardziej on top*/
+            }
+
+        #napisfooterdesktop{
+            margin: 0px auto;
+            width: 55%;
+            text-align: center;
+        }
+
+        #nazwiskodesktop{
+            width: auto;
+            float: right;
+            margin-right: 10px;
+            color: black; 
+            text-align: right;
+    }
+
+        #footermobile {
+    display:none;
+            }
+
+        #napisfootermobile{
+    display:none;
+        }
+
+        #nazwiskomobile{
+    display:none;
+    }
+}
+
+    /* dla telefonow */
+    @media only screen and (max-width: 768px){
+
+        #footerdesktop {
+display:none;
+            }
+
+        #napisfooterdesktop{
+display:none;
+        }
+
+        #nazwiskodesktop{
+display:none;
+    }
+
+        #footermobile {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            padding-bottom: 5%;
+            width: 100%;
+            height: auto;
+            max-height: 35px;
+            background-color: rgb(1,100,140);
+            color: white;
+            text-align: center;
+            font-family: 'Lato', sans-serif;
+            z-index: 10; /* powoduje ze footer jest on top - im wyzszy numer tym bardziej on top*/
+            }
+
+        #napisfootermobile{
+            margin: 0px auto;
+            width: auto;
+            text-align: center;
+        }
+
+        #nazwiskomobile{
+            width: auto;
+            margin-right: 10px;
+            color: black; 
+            text-align: center;
+    }
+}

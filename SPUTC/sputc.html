@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<!--Made by Oliwier Salamon-->
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Layout SP-UTC</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=10">
+        <meta name="description" content="Opis kokpitu C182 SP-UTC">
+        <meta name="author" content="Oliwier Salamon">
+        <link rel="stylesheet" href="../other/style1.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="../js/jquery.zoom.js"></script>
+        
+        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+        <script src="../js/pl.js"></script>
+
+        
+
+       <script type="text/javascript" src="../js/mapper.js"></script>
+       <script type="text/javascript" src="../js/cvi_map_lib.js"></script>
+
+<!-- dodaje mozliwosc responsive map image-->
+        <script type="text/javascript">            
+        window.onload = function () {
+
+            var ImageMap = function (map, img) {
+                    var n,
+                        areas = map.getElementsByTagName('area'),
+                        len = areas.length,
+                        coords = [],
+                        previousWidth = 9917;
+                    for (n = 0; n < len; n++) {
+                        coords[n] = areas[n].coords.split(',');
+                    }
+                    this.resize = function () {
+                        var n, m, clen,
+                            x = img.offsetWidth / previousWidth;
+                        for (n = 0; n < len; n++) {
+                            clen = coords[n].length;
+                            for (m = 0; m < clen; m++) {
+                                coords[n][m] *= x;
+                            }
+                            areas[n].coords = coords[n].join(',');
+                        }
+                        previousWidth = img.offsetWidth;
+                        return true;
+                    };
+                    window.onresize = this.resize;
+                },
+                imageMap = new ImageMap(document.getElementById('mapa'), document.getElementById('zdjecie'));
+                imageMap.resize();
+
+            cvi_map.add(document.getElementById('zdjecie'),{opacity: 50, bordercolor: '#01648c', areacolor: '#01648c', delayed: true});
+
+            return;
+        }</script>
+<!---->
+
+    </head>
+
+
+<body>
+    <!-- skrypt od szukajki-->
+    <script type="text/javascript">  
+        $(document).ready(function() {
+            $('.js-example-basic-single').select2({
+                placeholder: "Szukaj...",
+                allowClear: true,
+                language: "pl",
+                dropdownParent: $('#szukajka'),
+                matcher: customMatcher,
+                data: data,
+                minimumInputLength: 2
+            });
+        });
+
+        var data = [
+        {
+        id: '',
+        text: '',
+        synonym: ''
+    }, //to jest puste zeby jako pierwsza opcja wskoczylo
+    {
+        id: 'garmin',
+        text: 'Garmin lewy',
+        synonym: 'Ekran/PFD' //rozdzielam je za pomoca '/' tak po prostu
+    },
+    {
+        id: 'garmin2',
+        text: 'Garmin prawy',
+        synonym: 'Ekran/MFD'
+    },
+    {
+        id: 'throttle',
+        text: 'Throttle',
+        synonym: 'Przepustnica/Dźwignia'
+    }
+];
+
+        var defaultMatcher = $.fn.select2.defaults.defaults.matcher; //definiuje defaultowego matchera
+function customMatcher(params, data) {
+    var chars = {'ą':'a','ć':'c','ź':'z','ż':'z','ę':'e','ó':'o','ł':'l','ś':'s','ń':'n'}; //definiuje jakie znaki na co zamienic
+    var synonimypolskie = data.synonym.replace(/[ąćźżęółśń]/g, m => chars[m]); //zamienia wszystkie polskie znaki na normalne litery
+    if ($.trim(params.term) === ''){return data;}else{ //zeby nie wyskakiwal blad gdy nic nie jest wpisane
+ if (synonimypolskie.toUpperCase().indexOf(params.term.toUpperCase()) > -1) //pozwala wyszukiwac frazy bez polskich znakow
+ {var modifiedData = $.extend({}, data, true);
+ var slowooindeksie = synonimypolskie.toUpperCase().split('/').findIndex(v => v.includes(params.term.toUpperCase())) //patrzy ktory indeks ma slowo wpisywane z synonimow
+      modifiedData.text = modifiedData.text+' ('+data.synonym.split('/')[slowooindeksie]+')'; //wyswietla to slowo(synonim) w nawiasie
+     return modifiedData;}
+ if (data.synonym.toUpperCase().indexOf(params.term.toUpperCase()) > -1) //pozwala wyszukiwac frazy tak jak sa, czyli z polskimi znakami
+ {var modifiedData = $.extend({}, data, true);
+ var slowooindeksie = data.synonym.toUpperCase().split('/').findIndex(v => v.includes(params.term.toUpperCase())) //patrzy ktory indeks ma slowo wpisywane z synonimow z polskimi znakami
+      modifiedData.text = modifiedData.text+' ('+data.synonym.split('/')[slowooindeksie]+')'; //wyswietla to slowo(synonim) w nawiasie
+     return modifiedData;}}
+  return defaultMatcher(params, data);
+}
+
+//wrzuca kursor w pole szukania
+        $(document).on('select2:open', () => {
+    document.querySelector('.select2-search__field').focus();
+  }); //
+    </script>
+    <!---->
+
+<!-- funkcja ktora usuwa wszystkie podswietlenia oprocz tego na ktore sie najezdza -->
+    <script type="text/javascript">  
+    function usuwaniepodswietleniawszystkim(toid){
+//        for (var step = 0; step < document.querySelector("#mapa").children.length; step++) {
+//            if (toid == document.querySelector("#mapa").children[step].id) {}else{
+//        if(document.getElementById(toid).rel.split(',').includes(document.querySelector("#mapa").children[step].id)){}else{extAreaOut('zdjecie', 'garmin');}   
+//}
+//}
+//na gorze zostawiam stary sposob - ten na dole jest lepszy
+extAreaOut('zdjecie',toid);
+extAreaOver('zdjecie',toid);
+    }
+</script>
+
+
+
+    <header id="naglowek">
+        
+        <a target="_blank" href="https://ckl.put.poznan.pl/ato/"><img id="logomale" src="../images/Logo-CKL-PP-male.png" alt="CKL" class="logomale"></a>
+        <div id="szukajka" style="visibility: hidden;">
+            <select id="szukajkaselection" class="js-example-basic-single" name="szukaj" style="width: 100%">
+              </select>
+<!-- skrypt uruchamiajacy to co sie stanie po select i unselect przez szukajke-->
+              <script type="text/javascript">  
+                
+                    $('.js-example-basic-single').on('select2:select', function(e) {
+                        var wartosc = e.params.data;
+                       //cvi_map.remove(document.getElementById('zdjecie'));
+                       //cvi_map.add(document.getElementById('zdjecie'),{opacity: 50, bordercolor: '#01648c', areacolor: '#01648c', delayed: true});
+                       //powyzej stary sposob i usuniety - ponizej lepszy
+                       extAreaOut('zdjecie', wartosc.id);
+                       extAreaOver('zdjecie', wartosc.id);
+                });
+
+                $('.js-example-basic-single').on('select2:unselect', function(e) { //dodane 'e' w nowym sposobie
+                    var wartosc = e.params.data;  //dodane w nowym sposobie
+                    extAreaOut('zdjecie', wartosc.id); //ponizej sposob stary i usuniety, tutaj nowy, lepszy
+                    //cvi_map.remove(document.getElementById('zdjecie'));
+                       //cvi_map.add(document.getElementById('zdjecie'),{opacity: 50, bordercolor: '#01648c', areacolor: '#01648c', delayed: true});
+                       setTimeout(function(){$('.js-example-basic-single').select2('close');},1); //po usunieciu w szukajce nie otwiera sie szukajka jeszcze raz
+                });
+                    </script>
+<!---->
+<button id="przyblizbtn" onclick="zoomowanie(document.querySelector('#szukajkaselection').value);" style="min-width: 10%">Przybliż</button>
+<button id="idzbtn" onclick="if(document.querySelector('#szukajkaselection').value==''){}else{window.open(document.querySelector('#szukajkaselection').value+'.html','_blank')}" style="min-width: 10%">Idź</button>
+        </div>
+        <input type="image" src="../images/lupaikona.png" id="lupka" style="visibility:hidden" disabled="true" onclick="$('#zdjeciecontainer').zoom({ on:'click', magnify: 0.5, onZoomIn: function(){document.querySelector('#lupka').value='Kliknij na zdjęcie, aby wyjść z powiększenia';}, onZoomOut: function(){$('#zdjeciecontainer').trigger('zoom.destroy');  document.querySelector('#lupka').disabled = false;  document.querySelector('#lupka').type='image';  document.querySelector('#szukajka').style.visibility='visible';}}); 
+                                    document.querySelector('#szukajka').style.visibility='hidden';
+                                    document.querySelector('#lupka').type = 'button';
+                                    document.querySelector('#lupka').value='Kliknij na zdjęcie, aby powiększyć';
+                                    document.querySelector('#lupka').disabled = true;"></input>
+    </header>
+
+    <main>
+    <div id="zdjeciecontainer" class="layoutzdjecie" onclick="zoom.out({callback: function(){document.body.style.overflow = 'initial';}}); document.querySelector('#przyblizbtn').innerText = 'Przybliż'; $('.js-example-basic-single').prop('disabled', false); document.querySelector('#lupka').style.visibility='visible'; document.querySelector('#lupka').disabled = false;">
+    <img id="zdjecie" src="../images/SPUTCrgb.jpg" usemap="#image-map" class="mapper iborder01648c icolor01648c" onload="document.querySelector('#lupka').style.visibility='visible'; document.querySelector('#lupka').disabled = false; document.querySelector('#szukajka').style.visibility='visible';">
+    <map id="mapa" name="image-map">
+        <area id="garmin" target="_blank" alt="Garmin" title="Garmin" href="garmin.html" coords="2177,631,4157,2129" shape="rect" onmouseover="usuwaniepodswietleniawszystkim(this.id); $('.js-example-basic-single').val(this.id).trigger('change');" onmouseout="$('.js-example-basic-single').val(null).trigger('change');">
+        <area id="garmin2" target="_blank" alt="Garmin2" title="Garmin2" href="garmin2.html" coords="4602,640,6582,2138" shape="rect" onmouseover="usuwaniepodswietleniawszystkim(this.id); $('.js-example-basic-single').val(this.id).trigger('change');" onmouseout="$('.js-example-basic-single').val(null).trigger('change');">
+        <area id="throttle" target="_blank" alt="Throttle" title="Throttle" href="throttle.html" coords="4893,3802,136" shape="circle" onmouseover="usuwaniepodswietleniawszystkim(this.id); $('.js-example-basic-single').val(this.id).trigger('change');" onmouseout="$('.js-example-basic-single').val(null).trigger('change');">
+    </map>
+</div>
+
+
+
+
+
+</main>
+<br>
+
+    <footer id="footerdesktop">
+        <div id="nazwiskodesktop">Oliwier Salamon</div>
+        <div id="napisfooterdesktop">
+    Strona stworzona dla Centrum Kształcenia Lotniczego Politechniki Poznańskiej
+        </div>
+    </footer>
+    
+    <footer id="footermobile">
+        <div id="napisfootermobile">
+    Strona stworzona dla Centrum Kształcenia Lotniczego Politechniki Poznańskiej
+        </div>
+        <div id="nazwiskomobile">Oliwier Salamon</div>
+    </footer>
+    
+           <!-- ukrywa przycisk lupy na mobilnych-->
+           <script type="text/javascript">
+            if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
+             // true dla mobilnych
+             document.querySelector("#lupka").style.display="none";
+             var telefon = 1;
+           }else{var telefon = 0;}
+             </script>
+             <!---->
+
+    <!-- zoom do przyblizania po szukaniu-->
+    <script src="../js/zoom.js"></script>
+    <!-- obliczanie srodka area i zoomowanie do niego-->
+    <script type="text/javascript"> function zoomowanie(nazwazoom){ 
+        if(nazwazoom == ""){zoom.out({callback: function(){document.body.style.overflow = 'initial';}}); document.querySelector("#przyblizbtn").innerText = "Przybliż"; $(".js-example-basic-single").prop("disabled", false); document.querySelector('#lupka').style.visibility='visible'; document.querySelector("#lupka").disabled = false;}else{
+       if(document.querySelector("#przyblizbtn").innerText == "Oddal"){document.querySelector("#przyblizbtn").innerText = "Przybliż"; $(".js-example-basic-single").prop("disabled", false); document.querySelector('#lupka').style.visibility='visible'; document.querySelector("#lupka").disabled = false;}else{document.querySelector("#przyblizbtn").innerText = "Oddal"; $(".js-example-basic-single").prop("disabled", true); document.querySelector('#lupka').style.visibility='hidden'; document.querySelector("#lupka").disabled = true;}
+
+        var maxX = 0,
+        minX = Infinity,
+        maxY = 0,
+        minY = Infinity,
+        i = 0,
+        szerokoscokna = document.documentElement.clientWidth,
+        wysokoscokna = document.documentElement.clientHeight;
+
+            coords = document.querySelector('#'+nazwazoom).getAttribute('coords').split(',');
+            //to if jest dla circle tylko
+            if(coords.length == 3){
+                var x = parseInt(coords[0],10),
+                    y = parseInt(coords[1],10);
+
+                    var skala = Math.max(Math.min((0.75*szerokoscokna) / (parseInt(coords[2],10)), (0.75*wysokoscokna-110) / (parseInt(coords[2],10))), 1);
+            }else{
+ while (i < coords.length) {
+            var x = parseInt(coords[i++],10),
+                y = parseInt(coords[i++],10);
+
+            if (x < minX) minX = x;
+            else if (x > maxX) maxX = x;
+
+            if (y < minY) minY = y;
+            else if (y > maxY) maxY = y;
+        }
+
+ x = minX + (maxX - minX) / 2;
+ y = minY + (maxY - minY) / 2; 
+ //Math max i min sa po to w razie gdyby cos bylo bardzo dlugie a waskie lub odwrotnie
+ //-110 przy height jest na naglowek i footer
+ var skala = Math.max(Math.min((0.75*szerokoscokna) / (maxX - minX),(0.75*wysokoscokna-110) / (maxY - minY) ), 1);
+ 
+    }
+ if(telefon == 1){if(skala > 4){skala = 4;}}else{if(skala > 2){skala = 2;}}
+ if(window.scrollY != 0){window.scrollTo({top: 0, behavior: 'smooth' }); //scrolluje na gore tylko jesli nie jest jeszcze na gorze bo inaczej zle przenosi
+ setTimeout(function(){ zoom.to({
+    x: x,
+    y: y,
+    scale: skala
+  });},500); //czas po scrollu zeby przyblizyc
+}else{zoom.to({
+    x: x,
+    y: y,
+    scale: skala
+  });}
+
+  document.body.style.overflow = "hidden";
+}}
+  
+  </script>
+    
+
+</body>
+
+
+</html>
