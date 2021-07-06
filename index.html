@@ -2,39 +2,53 @@
 <!--Made by Oliwier Salamon-->
 <html>
     <head>
-        <title>Strona Główna</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=10" charset="utf-8">
+        <meta charset="UTF-8">
+        <title>Wybierz Layout</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=10">
+        <meta name="description" content="Strona z wyborem layoutu samolotu">
+        <meta name="author" content="Oliwier Salamon">
         <link rel="stylesheet" href="other/style1.css">
-
-        <div id="footerdesktop">
-            <div id="nazwiskodesktop">Oliwier Salamon</div>
-            <div id="napisfooterdesktop">
-        Strona stworzona dla Centrum Kształcenia Lotniczego Politechniki Poznańskiej
-            </div>
-        </div>
-
-        <div id="footermobile">
-            <div id="napisfootermobile">
-        Strona stworzona dla Centrum Kształcenia Lotniczego Politechniki Poznańskiej
-            </div>
-            <div id="nazwiskomobile">Oliwier Salamon</div>
-        </div>
+<!--favicons-->
+<link rel="apple-touch-icon" sizes="180x180" href="favi/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favi/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favi/favicon-16x16.png">
+<link rel="manifest" href="favi/site.webmanifest">
+<link rel="mask-icon" href="favi/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="theme-color" content="#ffffff">
+<!---->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
     </head>
 
 
-<body width="device-width">
+<body>
+<main>
 
 <img src="images/Logo-CKL-PP.png" alt="Logo CKL" class="logocenter">
 <br>
 <h2 class="center">Wybierz samolot, dla którego chcesz zobaczyć layout:</h2>
 
 <div class="center">
-<a href="SPUTC/sputc.html" class="button">Cessna 182T: SP-UTC</a>
+<button id="sputc" onclick="window.location.href='SPUTC/sputc.html'">Cessna 182T: SP-UTC</button>
 <p><br style="line-height:10px"></p>
 </div>
+</main>
 <br>
-<br>
-<br>
+
+<footer id="footerdesktop">
+    <div id="nazwiskodesktop">Oliwier Salamon</div>
+    <div id="napisfooterdesktop">
+Strona stworzona dla Centrum Kształcenia Lotniczego Politechniki Poznańskiej
+    </div>
+</footer>
+
+<footer id="footermobile">
+    <div id="napisfootermobile">
+Strona stworzona dla Centrum Kształcenia Lotniczego Politechniki Poznańskiej
+    </div>
+    <div id="nazwiskomobile">Oliwier Salamon</div>
+</footer>
+
 </body>
 </html>
