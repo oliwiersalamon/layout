@@ -126,8 +126,8 @@ document.getElementById("odp"+numeryodp[ktoraODP]).innerText=pytania[numer].odpo
         <div id="IDpytania"></div>
         <div id="OflagujPytanie"><input type="checkbox" id="ptaszekOflagowanie" onclick="
             if( document.getElementById('ptaszekOflagowanie').checked == true){
-                setCookie('Pytanie'+pytania[numer],true,30);
-            }else {setCookie('Pytanie'+pytania[numer],false,30);}
+                setCookie('Pytanie'+pytania[numer].id,true,30);
+            }else {setCookie('Pytanie'+pytania[numer].id,false,30);}
             ">Oflaguj pytanie</div>
     </header>
 
