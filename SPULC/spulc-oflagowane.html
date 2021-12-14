@@ -3,9 +3,9 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>TecnamP2006T</title>
+        <title>TecnamP2006T Oflagowane</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=10">
-        <meta name="description" content="Pytania z TecnamaP2006T">
+        <meta name="description" content="Pytania z TecnamaP2006T oflagowane">
         <meta name="author" content="Oliwier Salamon">
         <link rel="stylesheet" href="../other/style1.css">
 <!--favicons-->
@@ -96,7 +96,7 @@ document.getElementById("odp"+numeryodp[ktoraODP]).innerText=pytania[numer].odpo
     }
 if (getCookie('Pytanie'+pytania[numer].id) == 'true'){document.getElementById('ptaszekOflagowanie').checked = true;
 }else{
-    document.getElementById('ptaszekOflagowanie').checked = false;
+    losowaniePytania();
 
 }
 
