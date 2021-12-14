@@ -30,13 +30,20 @@
 
     <script type="text/javascript"> 
     var poprawnaODP = -1;
-    const pytaniawszystkie = pytania.slice(0); //zapamietuje wszystkie pytania
+    var numeroflagowanych = 0;
     var numer=0;
+    var oflagowane = [];
+    for(let i=0; i<pytania.length; i++){
+                if (getCookie('Pytanie'+pytania[i].id) == 'true'){
+                oflagowane.push(i);
+}
+            }
+            const pytaniawszystkie = oflagowane.slice(0); //zapamietuje wszystkie pytania
     function losowaniePytania(){
         document.getElementById("OflagujPytanie").style.visibility = 'visible'; 
-        if(pytania.length == 1) {
+        if(oflagowane.length == 1) {
             document.getElementById('next').innerText = "Zakończ";}
-        if(pytania.length == 0){
+        if(oflagowane.length == 0){
             document.getElementById('odp0').disabled=true; 
     document.getElementById('odp1').disabled=true; 
     document.getElementById('odp2').disabled=true; 
@@ -50,7 +57,9 @@
     }
         else{
 
-numer = Math.floor(Math.random() * pytania.length);
+
+numeroflagowanych = Math.floor(Math.random() * oflagowane.length);
+numer = oflagowane[numeroflagowanych];
 
 
 document.getElementById("pytanie").innerText=pytania[numer].question;
@@ -96,7 +105,7 @@ document.getElementById("odp"+numeryodp[ktoraODP]).innerText=pytania[numer].odpo
     }
 if (getCookie('Pytanie'+pytania[numer].id) == 'true'){document.getElementById('ptaszekOflagowanie').checked = true;
 }else{
-    losowaniePytania();
+    document.getElementById('ptaszekOflagowanie').checked = false;
 
 }
 
