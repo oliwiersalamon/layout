@@ -146,12 +146,33 @@ if (getCookie('Pytanie'+pytania[numer].id) == 'true'){document.getElementById('p
 
     <main>
         <button id="start" class="startPrzycisk" onclick="losowaniePytania(); 
-        document.getElementById('start').style.display = 'none';
-        document.getElementById('start').style.height='0px';
+        document.getElementById('start').style.visibility = 'hidden';
         document.getElementById('quiz').style.display = '';  ">Start</button>
+        
+       <div> 
+        <button id="wyjasnienie" class="wyjasnieniePrzycisk" style="visibility: hidden;" onclick="
+        if(document.getElementById('quiz').style.display == 'none'){
+        
+        document.getElementById('quiz').style.display = '';
+        document.getElementById('wyjasnienieTEXT').style.display = 'none';
+        document.getElementById('wyjasnienie').innerText = 'Wyjaśnienie';
+
+        }else{
+        document.getElementById('quiz').style.display = 'none';
+        document.getElementById('wyjasnienieTEXT').style.display = '';
+        document.getElementById('wyjasnienie').innerText = 'Pytanie';
+        document.getElementById('wyjasnienieTEXT').innerText = pytania[numer].wyjasnienie;
+
+    }
+        
+        ">Wyjaśnienie</button>
         
         <button id="next" class="nextPrzycisk" 
         onclick=" 
+        document.getElementById('quiz').style.display = '';
+        document.getElementById('wyjasnienieTEXT').style.display = 'none';
+        document.getElementById('wyjasnienie').innerText = 'Wyjaśnienie';
+
         document.getElementById('odp0').disabled=false;
         document.getElementById('odp1').disabled=false;
         document.getElementById('odp2').disabled=false;
@@ -161,6 +182,7 @@ if (getCookie('Pytanie'+pytania[numer].id) == 'true'){document.getElementById('p
         document.getElementById('odp2').style.backgroundColor = '';
         document.getElementById('odp3').style.backgroundColor = '';
         document.getElementById('next').style.visibility = 'hidden';
+        document.getElementById('wyjasnienie').style.visibility = 'hidden';
         document.getElementById('wartosc').disabled=false;
         document.getElementById('wartosc').value='';
         document.getElementById('sprawdzwartosc').disabled=false;
@@ -184,12 +206,15 @@ if (getCookie('Pytanie'+pytania[numer].id) == 'true'){document.getElementById('p
         
         "
         style="visibility: hidden;">Następne pytanie</button>
+
+        </div>
         
         <div id="quiz" class="quiz" style="display: none"> 
     <div id="pytanie">Pytanie</div>
     <br>
     <button id="odp0" class="odpowiedz" onclick="sprawdzaniePytania(0); 
     document.getElementById('next').style.visibility = 'visible';
+    document.getElementById('wyjasnienie').style.visibility = 'visible';
     document.getElementById('odp0').disabled=true; 
     document.getElementById('odp1').disabled=true; 
     document.getElementById('odp2').disabled=true; 
@@ -199,6 +224,7 @@ if (getCookie('Pytanie'+pytania[numer].id) == 'true'){document.getElementById('p
     <br>
     <button id="odp1" class="odpowiedz" onclick="sprawdzaniePytania(1); 
     document.getElementById('next').style.visibility = 'visible';
+    document.getElementById('wyjasnienie').style.visibility = 'visible';
     document.getElementById('odp0').disabled=true; 
     document.getElementById('odp1').disabled=true; 
     document.getElementById('odp2').disabled=true; 
@@ -208,6 +234,7 @@ if (getCookie('Pytanie'+pytania[numer].id) == 'true'){document.getElementById('p
     <br>
     <button id="odp2" class="odpowiedz" onclick="sprawdzaniePytania(2); 
     document.getElementById('next').style.visibility = 'visible';
+    document.getElementById('wyjasnienie').style.visibility = 'visible';
     document.getElementById('odp0').disabled=true; 
     document.getElementById('odp1').disabled=true; 
     document.getElementById('odp2').disabled=true; 
@@ -217,6 +244,7 @@ if (getCookie('Pytanie'+pytania[numer].id) == 'true'){document.getElementById('p
     <br>
     <button id="odp3" class="odpowiedz" onclick="sprawdzaniePytania(3); 
     document.getElementById('next').style.visibility = 'visible';
+    document.getElementById('wyjasnienie').style.visibility = 'visible';
     document.getElementById('odp0').disabled=true; 
     document.getElementById('odp1').disabled=true; 
     document.getElementById('odp2').disabled=true; 
@@ -228,6 +256,7 @@ if (getCookie('Pytanie'+pytania[numer].id) == 'true'){document.getElementById('p
     document.getElementById('wartosc').disabled=true;
     document.getElementById('sprawdzwartosc').disabled=true;
     document.getElementById('next').style.visibility = 'visible';
+    document.getElementById('wyjasnienie').style.visibility = 'visible';
 
     if(document.getElementById('wartosc').value == pytania[numer].odpowiedz1){
         LiczbaPunktow++;
@@ -243,11 +272,14 @@ if (getCookie('Pytanie'+pytania[numer].id) == 'true'){document.getElementById('p
     <div id="poprawnawartosc" class="quiz" style="display: none; color: green;"></div>
 </div>
 
+<div id="wyjasnienieTEXT" style="display: none;" class="quiz"></div>
+
 <button id="zakonczenie" class="quiz" style="display: none;" onclick="
 window.location.reload();
 ">Wciśnij, aby odświezyć stronę</button>
 
-
+<br>
+<br>
 
 </main>
 
