@@ -32,6 +32,7 @@
     }
 
     .logomale {
+        display: block;
         margin-left: 10px;
         width: 100px;
         height: auto;
@@ -76,42 +77,35 @@
         float: right;
     }
 
-    #IDpytania{
-        display: block;
+    #prawygorny{
+        position:block;
         margin-right: 10px;
-        /*margin-top: -50px;*/
+        margin-top: 10px;
         width: auto;
         height: auto;
-        max-height: 30px;
+        max-height: 20px;
         right: 0;
-        float: right;
+        top: 0;
         text-align: center;
+        float: right;
         font-family: 'Lato', sans-serif;
+        word-wrap: break-word;
     }
 
-    #OflagujPytanie{
-        display: block;
-        margin-right: 10px;
-        /*margin-top: -50px;*/
-        width: auto;
-        height: auto;
-        max-height: 30px;
-        right: 0;
-        float: right;
-        text-align: center;
-        font-family: 'Lato', sans-serif;
-    }
 
     #PrzejdzDoOflagowanych{
+        display: block;
         margin-left: 30px;
-        margin-top: 20px;
+        margin-top: 10px;
         width: auto;
         height: auto;
-        max-height: 30px;
+        max-height: 75px;
+        max-width: 20%;
         left: 0;
         float: left;
         text-align: center;
         font-family: 'Lato', sans-serif;
+        word-wrap: break-word;
     }
 
     .quiz {
