@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<!--Made by Oliwier Salamon-->
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>TecnamP2006T</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=10">
+        <meta name="description" content="Pytania z TecnamaP2006T">
+        <meta name="author" content="Oliwier Salamon">
+        <link rel="stylesheet" href="../other/style1.css">
+<!--favicons-->
+<link rel="apple-touch-icon" sizes="180x180" href="../faviutc/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../faviutc/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../faviutc/favicon-16x16.png">
+<link rel="manifest" href="../faviutc/site.webmanifest">
+<link rel="mask-icon" href="../faviutc/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="theme-color" content="#ffffff">
+<!---->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="pytania.js"></script>
+        <script src="cookies.js"></script>
+        
+
+    </head>
+
+
+<body>
+
+
+    <script type="text/javascript"> 
+    var poprawnaODP = -1;
+    const pytaniawszystkie = pytania.slice(0); //zapamietuje wszystkie pytania
+    var numer=0;
+    function losowaniePytania(){ 
+        if(pytania.length == 1) {
+            document.getElementById('next').innerText = "Zakończ";}
+        if(pytania.length == 0){
+            document.getElementById('odp0').disabled=true; 
+    document.getElementById('odp1').disabled=true; 
+    document.getElementById('odp2').disabled=true; 
+    document.getElementById('odp3').disabled=true;
+    document.getElementById("quiz").remove();
+            document.getElementById("wynik").innerText = "Twój wynik to: "+LiczbaPunktow+"/"+pytaniawszystkie.length;
+            document.getElementById("zakonczenie").style.visibility = 'visible';
+            document.getElementById("IDpytania").style.visibility = 'hidden';
+            document.getElementById('next').style.visibility='hidden';
+    }
+        else{
+
+numer = Math.floor(Math.random() * pytania.length);
+
+
+document.getElementById("pytanie").innerText=pytania[numer].question;
+document.getElementById("IDpytania").innerText="ID pytania: "+pytania[numer].id;
+if(pytania[numer].odpowiedzPISEMNA == 'tak'){
+    document.getElementById('odp0').style.visibility="hidden";
+    document.getElementById('odp1').style.visibility="hidden";
+    document.getElementById('odp2').style.visibility="hidden";
+    document.getElementById('odp3').style.visibility="hidden";
+    document.getElementById('odp0').style.height="0px";
+    document.getElementById('odp1').style.height="0px";
+    document.getElementById('odp2').style.height="0px";
+    document.getElementById('odp3').style.height="0px";
+    document.getElementById('wartosc').style.visibility="visible";
+    document.getElementById('sprawdzwartosc').style.visibility="visible";
+    
+}else{
+
+var numeryodp = [0,1,2,3];
+var ktoraODP = Math.floor(Math.random() * numeryodp.length);
+
+document.getElementById("odp"+numeryodp[ktoraODP]).innerText=pytania[numer].odpowiedz1;
+poprawnaODP = numeryodp[ktoraODP];
+
+numeryodp.splice(ktoraODP, 1);
+var ktoraODP = Math.floor(Math.random() * numeryodp.length);
+
+document.getElementById("odp"+numeryodp[ktoraODP]).innerText=pytania[numer].odpowiedz2;
+
+numeryodp.splice(ktoraODP, 1);
+var ktoraODP = Math.floor(Math.random() * numeryodp.length);
+
+document.getElementById("odp"+numeryodp[ktoraODP]).innerText=pytania[numer].odpowiedz3;
+
+numeryodp.splice(ktoraODP, 1);
+var ktoraODP = Math.floor(Math.random() * numeryodp.length);
+
+document.getElementById("odp"+numeryodp[ktoraODP]).innerText=pytania[numer].odpowiedz4;
+
+
+        }
+
+    }
+//if (getCookie(pytania[numer]) == true){document.getElementById('ptaszekOflagowanie').checked = true;
+//}else{
+//    document.getElementById('ptaszekOflagowanie').checked = false;
+
+//}
+
+    }
+    </script>
+
+    <script type="text/javascript"> 
+    var LiczbaPunktow=0;
+    function sprawdzaniePytania(odp){ 
+        var poprawnaODP2 = poprawnaODP;
+        if(poprawnaODP2 == odp){
+            document.getElementById("odp"+poprawnaODP).style.backgroundColor = "rgba(58, 180, 79, 0.562)";
+            LiczbaPunktow++;
+        }else{
+
+            document.getElementById("odp0").style.backgroundColor = "rgba(180, 58, 58, 0.562)";
+            document.getElementById("odp1").style.backgroundColor = "rgba(180, 58, 58, 0.562)";
+            document.getElementById("odp2").style.backgroundColor = "rgba(180, 58, 58, 0.562)";
+            document.getElementById("odp3").style.backgroundColor = "rgba(180, 58, 58, 0.562)";
+            document.getElementById("odp"+poprawnaODP).style.backgroundColor = "rgba(58, 180, 79, 0.562)";
+        }
+    }
+    </script>
+
+    <header id="naglowek">
+        
+        <a target="_blank" href="https://ckl.put.poznan.pl/ato/"><img id="logomale" src="../images/Logo-CKL-PP-male.png" alt="CKL" class="logomale"></a>
+        <div id="wynik" class="quiz"> </div>
+        <div id="IDpytania"></div>
+        <div id="OflagujPytanie"><input type="checkbox" id="ptaszekOflagowanie" onclick="
+            if( document.getElementById('ptaszekOflagowanie').checked == true){
+                setCookie('Pytanie'+pytania[numer],true,30);
+            }else {setCookie('Pytanie'+pytania[numer],false,30);}
+            ">Oflaguj pytanie</div>
+    </header>
+
+
+    <main>
+        <br>
+        <button id="start" class="startPrzycisk" onclick="losowaniePytania(); 
+        document.getElementById('start').style.visibility='hidden'; 
+        document.getElementById('start').style.height='0px';
+        document.getElementById('quiz').style.visibility='visible'; ">Start</button>
+        
+        <button id="next" class="nextPrzycisk" 
+        onclick=" 
+        document.getElementById('odp0').disabled=false;
+        document.getElementById('odp1').disabled=false;
+        document.getElementById('odp2').disabled=false;
+        document.getElementById('odp3').disabled=false; 
+        document.getElementById('odp0').style.backgroundColor = '';
+        document.getElementById('odp1').style.backgroundColor = '';
+        document.getElementById('odp2').style.backgroundColor = '';
+        document.getElementById('odp3').style.backgroundColor = '';
+        document.getElementById('next').style.visibility='hidden';
+        document.getElementById('wartosc').disabled=false;
+        document.getElementById('wartosc').value='';
+        document.getElementById('sprawdzwartosc').disabled=false;
+        document.getElementById('poprawnawartosc').style.visibility = 'hidden';
+
+        if(pytania[numer].odpowiedzPISEMNA == 'tak'){
+            document.getElementById('odp0').style.visibility='visible';
+            document.getElementById('odp1').style.visibility='visible';
+            document.getElementById('odp2').style.visibility='visible';
+            document.getElementById('odp3').style.visibility='visible';
+    document.getElementById('odp0').style.height='10vh';
+    document.getElementById('odp1').style.height='10vh';
+    document.getElementById('odp2').style.height='10vh';
+    document.getElementById('odp3').style.height='10vh';
+    document.getElementById('wartosc').style.visibility='hidden';
+    document.getElementById('sprawdzwartosc').style.visibility='hidden';
+        }
+        document.getElementById('wartosc').style.color = 'black';
+        pytania.splice(numer, 1);
+        losowaniePytania();
+        
+        "
+        style="visibility: hidden">Następne pytanie</button>
+        
+        <div id="quiz" class="quiz" style="visibility: hidden"> 
+    <div id="pytanie">Pytanie</div>
+    <br>
+    <br>
+    <button id="odp0" class="odpowiedz" onclick="sprawdzaniePytania(0); 
+    document.getElementById('next').style.visibility='visible'; 
+    document.getElementById('odp0').disabled=true; 
+    document.getElementById('odp1').disabled=true; 
+    document.getElementById('odp2').disabled=true; 
+    document.getElementById('odp3').disabled=true; 
+    document.getElementById('wynik').innerText = 'Twój wynik to: '+LiczbaPunktow+'/'+(pytaniawszystkie.length-pytania.length+1);">Odp1</button> 
+    <br>
+    <br>
+    <button id="odp1" class="odpowiedz" onclick="sprawdzaniePytania(1); 
+    document.getElementById('next').style.visibility='visible'; 
+    document.getElementById('odp0').disabled=true; 
+    document.getElementById('odp1').disabled=true; 
+    document.getElementById('odp2').disabled=true; 
+    document.getElementById('odp3').disabled=true;
+    document.getElementById('wynik').innerText = 'Twój wynik to: '+LiczbaPunktow+'/'+(pytaniawszystkie.length-pytania.length+1);">Odp2</button> 
+    <br>
+    <br>
+    <button id="odp2" class="odpowiedz" onclick="sprawdzaniePytania(2); 
+    document.getElementById('next').style.visibility='visible'; 
+    document.getElementById('odp0').disabled=true; 
+    document.getElementById('odp1').disabled=true; 
+    document.getElementById('odp2').disabled=true; 
+    document.getElementById('odp3').disabled=true;
+    document.getElementById('wynik').innerText = 'Twój wynik to: '+LiczbaPunktow+'/'+(pytaniawszystkie.length-pytania.length+1);">Odp3</button> 
+    <br>
+    <br>
+    <button id="odp3" class="odpowiedz" onclick="sprawdzaniePytania(3); 
+    document.getElementById('next').style.visibility='visible'; 
+    document.getElementById('odp0').disabled=true; 
+    document.getElementById('odp1').disabled=true; 
+    document.getElementById('odp2').disabled=true; 
+    document.getElementById('odp3').disabled=true;
+    document.getElementById('wynik').innerText = 'Twój wynik to: '+LiczbaPunktow+'/'+(pytaniawszystkie.length-pytania.length+1);">Odp4</button> 
+
+    <input id="wartosc" class="odpowiedz" style="visibility: hidden; height:5vh; width: 50%; text-align: center;">
+    <button id="sprawdzwartosc" style="visibility: hidden" onclick="
+    document.getElementById('wartosc').disabled=true;
+    document.getElementById('sprawdzwartosc').disabled=true;
+    document.getElementById('next').style.visibility='visible';
+
+    if(document.getElementById('wartosc').value == pytania[numer].odpowiedz1){
+        LiczbaPunktow++;
+        document.getElementById('wartosc').style.color = 'green';
+    }else{
+        document.getElementById('wartosc').style.color = 'red';
+        document.getElementById('poprawnawartosc').innerText = pytania[numer].odpowiedz1;
+        document.getElementById('poprawnawartosc').style.visibility = 'visible';
+
+    }
+    document.getElementById('wynik').innerText = 'Twój wynik to: '+LiczbaPunktow+'/'+(pytaniawszystkie.length-pytania.length+1);
+    ">Sprawdź</button>
+    <div id="poprawnawartosc" class="quiz" style="visibility: hidden; color: green;"></div>
+</div>
+
+<button id="zakonczenie" class="quiz" style="visibility: hidden;" onclick="
+window.location.reload();
+">Wciśnij, aby odświezyć stronę</button>
+
+
+
+</main>
+
+    <footer id="footerdesktop">
+        <div id="nazwiskodesktop">Oliwier Salamon</div>
+        <div id="napisfooterdesktop">
+    Strona stworzona dla Centrum Kształcenia Lotniczego Politechniki Poznańskiej
+        </div>
+    </footer>
+    
+    <footer id="footermobile">
+        <div id="napisfootermobile">
+    Strona stworzona dla Centrum Kształcenia Lotniczego Politechniki Poznańskiej
+        </div>
+        <div id="nazwiskomobile">Oliwier Salamon</div>
+    </footer>
+
+</body>
+</html>
