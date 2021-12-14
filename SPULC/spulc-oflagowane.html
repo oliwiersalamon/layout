@@ -146,7 +146,7 @@ if (getCookie('Pytanie'+pytania[numer].id) == 'true'){document.getElementById('p
             window.location.href='spulc.html'
             ">Wszystkie</button>
             <div id="srodekgorny">
-            <div id="intro" class="quiz"> WSZYSTKIE PYTANIA </div>
+            <div id="intro" class="quiz"> OFLAGOWANE </div>
             <div id="wynik" class="quiz"> </div> </div>
     </header>
 
@@ -230,7 +230,7 @@ if (getCookie('Pytanie'+pytania[numer].id) == 'true'){document.getElementById('p
     document.getElementById('odp3').disabled=true;
     document.getElementById('wynik').innerText = 'Twój wynik to: '+LiczbaPunktow+'/'+(pytaniawszystkie.length-oflagowane.length+1);">Odp4</button> 
 
-    <input id="wartosc" class="odpowiedz" style="display: none; height:5vh; width: 50%; text-align: center;">
+    <input type="number" id="wartosc" class="odpowiedz" style="display: none; height:5vh; width: 50%; text-align: center;">
     <button id="sprawdzwartosc" style="display: none;" onclick="
     document.getElementById('wartosc').disabled=true;
     document.getElementById('sprawdzwartosc').disabled=true;
