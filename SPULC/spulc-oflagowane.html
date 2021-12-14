@@ -133,6 +133,10 @@ if (getCookie('Pytanie'+pytania[numer].id) == 'true'){document.getElementById('p
     <header id="naglowek">
         
         <a target="_blank" href="https://ckl.put.poznan.pl/ato/"><img id="logomale" src="../images/Logo-CKL-PP-male.png" alt="CKL" class="logomale"></a>
+        <button id="PrzejdzDoOflagowanych" onclick="
+        window.location.href='spulc.html'
+        ">Przejdź do wszystkich pytań</button>
+        <div id="intro" class="quiz"> OFLAGOWANE PYTANIA </div>
         <div id="wynik" class="quiz"> </div>
         <div id="IDpytania"></div>
         <div id="OflagujPytanie" style="visibility: hidden;"><input type="checkbox" id="ptaszekOflagowanie" onclick="
