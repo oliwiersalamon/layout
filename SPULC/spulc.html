@@ -92,11 +92,11 @@ document.getElementById("odp"+numeryodp[ktoraODP]).innerText=pytania[numer].odpo
         }
 
     }
-//if (getCookie(pytania[numer]) == true){document.getElementById('ptaszekOflagowanie').checked = true;
-//}else{
-//    document.getElementById('ptaszekOflagowanie').checked = false;
+if (getCookie('Pytanie'+pytania[numer].id) == true){document.getElementById('ptaszekOflagowanie').checked = true;
+}else{
+    document.getElementById('ptaszekOflagowanie').checked = false;
 
-//}
+}
 
     }
     </script>
