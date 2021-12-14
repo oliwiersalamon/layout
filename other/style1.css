@@ -78,16 +78,27 @@
     }
 
     #prawygorny{
-        position:block;
+        display:block;
         margin-right: 10px;
         margin-top: 10px;
         width: auto;
         height: auto;
-        max-height: 20px;
         right: 0;
         top: 0;
         text-align: center;
         float: right;
+        font-family: 'Lato', sans-serif;
+        word-wrap:break-word;
+    }
+
+    #srodekgorny{
+        display: block;
+        margin-right: 10px;
+        margin-top: 10px;
+        width: auto;
+        height: auto;
+        top: 0;
+        text-align: center;
         font-family: 'Lato', sans-serif;
         word-wrap: break-word;
     }
@@ -95,7 +106,7 @@
 
     #PrzejdzDoOflagowanych{
         display: block;
-        margin-left: 30px;
+        margin-left: 10px;
         margin-top: 10px;
         width: auto;
         height: auto;
