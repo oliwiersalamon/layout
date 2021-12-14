@@ -121,10 +121,7 @@ if (getCookie('Pytanie'+pytania[numer].id) == 'true'){document.getElementById('p
             LiczbaPunktow++;
         }else{
 
-            document.getElementById("odp0").style.backgroundColor = "rgba(180, 58, 58, 0.562)";
-            document.getElementById("odp1").style.backgroundColor = "rgba(180, 58, 58, 0.562)";
-            document.getElementById("odp2").style.backgroundColor = "rgba(180, 58, 58, 0.562)";
-            document.getElementById("odp3").style.backgroundColor = "rgba(180, 58, 58, 0.562)";
+            document.getElementById("odp"+odp).style.backgroundColor = "rgba(180, 58, 58, 0.562)";
             document.getElementById("odp"+poprawnaODP).style.backgroundColor = "rgba(58, 180, 79, 0.562)";
         }
     }
@@ -132,6 +129,16 @@ if (getCookie('Pytanie'+pytania[numer].id) == 'true'){document.getElementById('p
 
     <header id="naglowek">
         
+<!-- ukrywa logo na mobilnych-->
+<script type="text/javascript">
+    if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
+     // true dla mobilnych
+     document.getElementById('logomale').style.display="none";
+     var telefon = 1;
+   }else{var telefon = 0;}
+     </script>
+     <!---->
+
         <a target="_blank" href="https://ckl.put.poznan.pl/ato/"><img id="logomale" src="../images/Logo-CKL-PP-male.png" alt="CKL" class="logomale"></a>
         <button id="PrzejdzDoOflagowanych" onclick="
         window.location.href='spulc.html'
@@ -148,7 +155,6 @@ if (getCookie('Pytanie'+pytania[numer].id) == 'true'){document.getElementById('p
 
 
     <main>
-        <br>
         <button id="start" class="startPrzycisk" onclick="losowaniePytania(); 
         document.getElementById('start').style.visibility='hidden'; 
         document.getElementById('start').style.height='0px';
@@ -191,7 +197,6 @@ if (getCookie('Pytanie'+pytania[numer].id) == 'true'){document.getElementById('p
         
         <div id="quiz" class="quiz" style="visibility: hidden"> 
     <div id="pytanie">Pytanie</div>
-    <br>
     <br>
     <button id="odp0" class="odpowiedz" onclick="sprawdzaniePytania(0); 
     document.getElementById('next').style.visibility='visible'; 
