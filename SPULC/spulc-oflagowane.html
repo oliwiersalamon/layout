@@ -132,9 +132,7 @@ if (getCookie('Pytanie'+pytania[numer].id) == 'true'){document.getElementById('p
 
         <a id="aLOGOMALE" target="_blank" href="https://ckl.put.poznan.pl/ato/"><img id="logomale" src="../images/Logo-CKL-PP-male.png" alt="CKL" class="logomale"></a>
         
-        <button id="PrzejdzDoOflagowanych" onclick="
-            window.location.href='spulc-oflagowane.html'
-            ">Przejdź do Oflagowanych</button>
+        
         
         <div id="prawygorny">
         <div id="IDpytania"></div>
@@ -144,8 +142,12 @@ if (getCookie('Pytanie'+pytania[numer].id) == 'true'){document.getElementById('p
             }else {setCookie('Pytanie'+pytania[numer].id,false,30);}
             ">Oflaguj pytanie</div>
             </div>
+            <button id="PrzejdzDoOflagowanych" onclick="
+            window.location.href='spulc-oflagowane.html'
+            ">Wszystkie</button>
+            <div id="srodekgorny">
             <div id="intro" class="quiz"> WSZYSTKIE PYTANIA </div>
-            <div id="wynik" class="quiz"> </div>
+            <div id="wynik" class="quiz"> </div> </div>
     </header>
 
 
