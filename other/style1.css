@@ -201,6 +201,9 @@ button[disabled]{
         #nazwiskomobile{
     display:none;
     }
+    #aLOGOMALE{
+        display: '';
+    }
 }
 
     /* dla telefonow */
@@ -245,4 +248,7 @@ display:none;
             color: black; 
             text-align: center;
     }
+        #aLOGOMALE{
+            display: none;
+        }
 }
