@@ -145,13 +145,25 @@
     }
 
     .nextPrzycisk{
-        display: block;
+
         margin-left: auto;
         margin-right: 10px;
         text-align: center;
         font-family: 'Lato', sans-serif;
         width: 20%;
         height: 10vh;
+        float: right;
+    }
+
+    .wyjasnieniePrzycisk{
+  
+        margin-left: 10px;
+        margin-right: auto;
+        text-align: center;
+        font-family: 'Lato', sans-serif;
+        width: 20%;
+        height: 10vh;
+        float: left;
     }
 
 
