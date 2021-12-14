@@ -239,7 +239,7 @@ if (getCookie('Pytanie'+pytania[numer].id) == 'true'){document.getElementById('p
         document.getElementById('poprawnawartosc').style.visibility = 'visible';
 
     }
-    document.getElementById('wynik').innerText = 'Twój wynik to: '+LiczbaPunktow+'/'+(pytaniawszystkie.length-pytania.length+1);
+    document.getElementById('wynik').innerText = 'Twój wynik to: '+LiczbaPunktow+'/'+(pytaniawszystkie.length-oflagowane.length+1);
     ">Sprawdź</button>
     <div id="poprawnawartosc" class="quiz" style="visibility: hidden; color: green;"></div>
 </div>
