@@ -102,6 +102,18 @@
         font-family: 'Lato', sans-serif;
     }
 
+    #PrzejdzDoOflagowanych{
+        margin-left: 30px;
+        margin-top: 20px;
+        width: auto;
+        height: auto;
+        max-height: 30px;
+        left: 0;
+        float: left;
+        text-align: center;
+        font-family: 'Lato', sans-serif;
+    }
+
     .quiz {
         display: block;
         margin-left: auto;
