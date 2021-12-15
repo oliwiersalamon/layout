@@ -54,6 +54,12 @@ numer = Math.floor(Math.random() * pytania.length);
 
 
 document.getElementById("pytanie").innerText=pytania[numer].question;
+
+if(pytania[numer].zdjecie == "tak"){
+document.getElementById("zdjeciepytania").src = pytania[numer].source;
+document.getElementById("zdjeciepytania").style.display = ''
+}else{document.getElementById("zdjeciepytania").style.display = 'none'}
+
 document.getElementById("IDpytania").innerText="ID pytania: "+pytania[numer].id;
 if(pytania[numer].odpowiedzPISEMNA == 'tak'){
     document.getElementById('odp0').style.display = 'none';
@@ -92,13 +98,13 @@ document.getElementById("odp"+numeryodp[ktoraODP]).innerText=pytania[numer].odpo
 
 
         }
-
-    }
-if (getCookie('Pytanie'+pytania[numer].id) == 'true'){document.getElementById('ptaszekOflagowanie').checked = true;
+        if (getCookie('Pytanie'+pytania[numer].id) == 'true'){document.getElementById('ptaszekOflagowanie').checked = true;
 }else{
     document.getElementById('ptaszekOflagowanie').checked = false;
 
 }
+    }
+
 
     }
     </script>
@@ -211,6 +217,7 @@ if (getCookie('Pytanie'+pytania[numer].id) == 'true'){document.getElementById('p
         
         <div id="quiz" class="quiz" style="display: none"> 
     <div id="pytanie">Pytanie</div>
+    <img id="zdjeciepytania" src="" alt="zdjecie" style="display: none;">
     <br>
     <button id="odp0" class="odpowiedz" onclick="sprawdzaniePytania(0); 
     document.getElementById('next').style.visibility = 'visible';
