@@ -635,7 +635,7 @@ odpowiedz4: "jest możliwe tylko na dużej wysokości"
 },
 
 {   id: 66,
-   question: "Wczasie startu najbardziej krytyczny punkt przy defekcie silnika występuje: ",
+   question: "W czasie startu najbardziej krytyczny punkt przy defekcie silnika występuje: ",
    odpowiedzPISEMNA: "nie",
    wyjasnienie: "'VMC - Minimalna prędkość lotu kontrolowanego: to minimalna prędkość potrzebna do efektywnego sterowania samolotem w przypadku awarii jednego silnika.' Przed osiągnięciem VMC w przypadku utraty jednego silnika sterowanie samolotem może być niewystarczające.",
    odpowiedz1: "przed osiągnięciem VMC",
