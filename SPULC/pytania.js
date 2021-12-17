@@ -16,9 +16,9 @@ odpowiedz4: "jest możliwe tylko na dużej wysokości"
     odpowiedzPISEMNA: "nie",
     wyjasnienie: "Przepustnica pozwala na zwiększenie ciśnienia ładowania, a zmienny skok śmigła pozwala na zmianę obrotów silnika.",
     odpowiedz1: "dźwigni przepustnicy i dźwigni skoku śmigła",
-    odpowiedz2: "dźwigni przepustnicy",
-    odpowiedz3: "dźwigni skoku śmigła",
-    odpowiedz4: "dźwigni mieszanki"
+    odpowiedz2: "trymeru, dźwigni przepustnicy i dźwigni skoku śmigła",
+    odpowiedz3: "dźwigni przepustnicy, dźwigni skoku smigła i dźwigni mieszanki",
+    odpowiedz4: "wszystkie odpowiedzi są prawidłowe"
     },
     
  {   id: 2,
@@ -156,13 +156,10 @@ odpowiedz4: "jest możliwe tylko na dużej wysokości"
  },
 
  {   id: 16,
-    question: "Maksymalna moc startowa jednego silnika wynosi: ",
-    odpowiedzPISEMNA: "nie",
+    question: "Maksymalna moc startowa jednego silnika wynosi: [odpowiedź wpisz z przecinkiem] (KM)",
+    odpowiedzPISEMNA: "tak",
     wyjasnienie: "Z AFM: '73.5 kW (98.6hp) @ 5800 rpm - maksymalnie 5 minut.69.0 kW (92.5hp) @ 5500 rpm – ciągła'",
-    odpowiedz1: "98,6KM",
-    odpowiedz2: "92,5KM",
-    odpowiedz3: "100KM",
-    odpowiedz4: "112KM"
+    odpowiedz1: "98,6KM"
  },
 
  {   id: 17,
@@ -359,7 +356,7 @@ odpowiedz4: "jest możliwe tylko na dużej wysokości"
  {   id: 37,
     question: "Przy maksymalnym ciężarze startowym długość rozbiegu zwiększy się: ",
     odpowiedzPISEMNA: "nie",
-    wyjasnienie: "Klapy startowe skracają długość rozbiegu, tak samo jak wysokie ciśnienie i niska temperatura.",
+    wyjasnienie: "Klapy startowe skracają długość rozbiegu, tak samo jak wysokie ciśnienie i niska temperatura. Dlatego jedyną poprawną tutaj odpowiedzią jest wyższa temperatura.",
     odpowiedz1: "przy wyższej temperaturze powietrza na ziemi",
     odpowiedz2: "przy niższej temperaturze powietrza na ziemi",
     odpowiedz3: "przy wyższym ciśnieniu atmosferycznym",
@@ -441,9 +438,9 @@ odpowiedz4: "jest możliwe tylko na dużej wysokości"
  },
 
  {   id: 46,
-    question: "Decydujący wpływ na charakterystyki lotne dla steru wywiera: ",
+    question: "Decydujący wpływ na charakterystyki lotne dla startu wywiera: ",
     odpowiedzPISEMNA: "nie",
-    wyjasnienie: "Sterowność jest tym większa, im środek ciężkości jest położony bardziej z tyłu (w granicach obwiedni). Spośród pozostałych odpowiedzi, to on ma największy wpływ na sterowność, nazwane tutaj charakterystykami lotnymi.",
+    wyjasnienie: "Pomimo, że wiele z tych odpowiedzi wydaje się prawidłowych, to takie pytanie w bazie występuje i poprawną odpowiedzią jest położenie środka ciężkości.",
     odpowiedz1: "położenie środka ciężkości",
     odpowiedz2: "ilość zatankowanego paliwa",
     odpowiedz3: "kierunek i rodzaj nawierzchni",
@@ -567,7 +564,7 @@ odpowiedz4: "jest możliwe tylko na dużej wysokości"
 {   id: 59,
    question: "Podczas rozbiegu pilot powinien sprawdzić oprócz obrotów silnika: ",
    odpowiedzPISEMNA: "nie",
-   wyjasnienie: "Ustawienie kranów paliwa, położenie klap i zamknięcie drzwi powinno zostać sprawdzone przed wjazdem na pas. Podczas rozbiegu należy sprawdzić wzrost prędkości i potwierdzić to call-outem 'Airspeed alive', dlatego ta odpowiedź wydaje się najbardziej rozsądna.",
+   wyjasnienie: "Ustawienie kranów paliwa, położenie klap i zamknięcie drzwi powinno zostać sprawdzone przed wjazdem na pas. Podczas rozbiegu należy sprawdzić wzrost prędkości i potwierdzić to call-outem 'Airspeed alive', dlatego jest to poprawna odpowiedź.",
    odpowiedz1: "przepływ paliwa i wzrost prędkości na prędkościomierzu",
    odpowiedz2: "ustawienie kranów paliwa",
    odpowiedz3: "położenie klap podskrzydłowych",
@@ -912,7 +909,7 @@ odpowiedz4: "jest możliwe tylko na dużej wysokości"
    source: "../images/SPULC/standby.jpg",
    wyjasnienie: "Strona 207 w AFM SP-ULC",
    odpowiedz1: "PSI",
-   odpowiedz2: "°C/F",
+   odpowiedz2: "bar",
    odpowiedz3: "gal",
    odpowiedz4: "gal/min"
 },
@@ -1059,6 +1056,90 @@ odpowiedz4: "jest możliwe tylko na dużej wysokości"
    odpowiedz2: "°C/F",
    odpowiedz3: "Litry",
    odpowiedz4: "PSI"
+},
+
+{   id: 103,
+   question: "Co oznacza przycisk oznaczony numerem 1?",
+   odpowiedzPISEMNA: "nie",
+   zdjecie: "tak",
+   source: "../images/SPULC/przyciski.jpg",
+   wyjasnienie: "Strona 207 w AFM SP-ULC. LH FIELD - lewy alternator",
+   odpowiedz1: "LH FIELD",
+   odpowiedz2: "LH Avionic",
+   odpowiedz3: "LH Crossbus",
+   odpowiedz4: "Master Switch"
+},
+
+{   id: 104,
+   question: "Co oznacza przycisk oznaczony numerem 2?",
+   odpowiedzPISEMNA: "nie",
+   zdjecie: "tak",
+   source: "../images/SPULC/przyciski.jpg",
+   wyjasnienie: "Strona 207 w AFM SP-ULC.",
+   odpowiedz1: "Master Switch",
+   odpowiedz2: "RH Avionic",
+   odpowiedz3: "LH Crossbus",
+   odpowiedz4: "RH FIELD"
+},
+
+{   id: 105,
+   question: "Co oznacza przycisk oznaczony numerem 3?",
+   odpowiedzPISEMNA: "nie",
+   zdjecie: "tak",
+   source: "../images/SPULC/przyciski.jpg",
+   wyjasnienie: "Strona 207 w AFM SP-ULC. RH FIELD - prawy alternator",
+   odpowiedz1: "RH FIELD",
+   odpowiedz2: "RH Avionic",
+   odpowiedz3: "RH Crossbus",
+   odpowiedz4: "Master Switch"
+},
+
+{   id: 106,
+   question: "Co oznacza przycisk oznaczony numerem 4?",
+   odpowiedzPISEMNA: "nie",
+   zdjecie: "tak",
+   source: "../images/SPULC/przyciski.jpg",
+   wyjasnienie: "Strona 207 w AFM SP-ULC.",
+   odpowiedz1: "LH Avionic",
+   odpowiedz2: "LH FIELD",
+   odpowiedz3: "LH Crossbus",
+   odpowiedz4: "Master Switch"
+},
+
+{   id: 107,
+   question: "Co oznacza przycisk oznaczony numerem 5?",
+   odpowiedzPISEMNA: "nie",
+   zdjecie: "tak",
+   source: "../images/SPULC/przyciski.jpg",
+   wyjasnienie: "Strona 207 w AFM SP-ULC.",
+   odpowiedz1: "RH Avionic",
+   odpowiedz2: "RH FIELD",
+   odpowiedz3: "RH Crossbus",
+   odpowiedz4: "LH FIELD"
+},
+
+{   id: 108,
+   question: "Co oznacza przycisk oznaczony numerem 6?",
+   odpowiedzPISEMNA: "nie",
+   zdjecie: "tak",
+   source: "../images/SPULC/przyciski.jpg",
+   wyjasnienie: "Strona 207 w AFM SP-ULC.",
+   odpowiedz1: "LH Crossbus",
+   odpowiedz2: "LH FIELD",
+   odpowiedz3: "LH Avionic",
+   odpowiedz4: "RH Avionic"
+},
+
+{   id: 109,
+   question: "Co oznacza przycisk oznaczony numerem 7?",
+   odpowiedzPISEMNA: "nie",
+   zdjecie: "tak",
+   source: "../images/SPULC/przyciski.jpg",
+   wyjasnienie: "Strona 207 w AFM SP-ULC.",
+   odpowiedz1: "RH Crossbus",
+   odpowiedz2: "RH FIELD",
+   odpowiedz3: "RH Avionic",
+   odpowiedz4: "LH Crossbus"
 }
 
 ];
